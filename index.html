@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mía's Village of Hope</title>
+<meta name="description" content="A community of love, faith and hope surrounding Mía on her journey.">
+<meta property="og:title" content="Mía's Village of Hope">
+<meta property="og:description" content="A community of love, faith and hope surrounding Mía on her journey.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Lato:wght@400;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- FIXED BANNER -->
+<header class="app-banner">
+  <div class="banner-inner">
+    <img src="images/emblem.png" alt="Mía's Village of Hope emblem" class="banner-emblem">
+    <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">ES</button>
+  </div>
+</header>
+
+<!-- HOME SCREEN — VILLAGE MAP -->
+<main id="screen-home" class="screen screen-home active">
+  <div class="map-wrap">
+    <!-- PLACEHOLDER: images/village-map-desktop.png pendiente — usando la móvil en todos los tamaños por ahora -->
+    <img src="images/village-map-mobile.png" alt="Illustrated map of Mía's Village with five stations along a path" class="map-img">
+
+    <button class="hotspot" style="top:11%; left:26%; width:26%; height:14%;" data-target="screen-meet-mia" aria-label="Meet Mía">
+      <span class="sr-only">Meet Mía</span>
+    </button>
+    <button class="hotspot" style="top:30%; left:50%; width:26%; height:14%;" data-target="screen-village" aria-label="The Village">
+      <span class="sr-only">The Village</span>
+    </button>
+    <button class="hotspot" style="top:47%; left:34%; width:40%; height:12%;" data-target="screen-needs" aria-label="This Week's Needs">
+      <span class="sr-only">This Week's Needs</span>
+    </button>
+    <button class="hotspot" style="top:67%; left:36%; width:26%; height:12%;" data-target="screen-collaborators" aria-label="Collaborators">
+      <span class="sr-only">Collaborators</span>
+    </button>
+    <button class="hotspot" style="top:82%; left:60%; width:26%; height:13%;" data-target="screen-contact" aria-label="Contact">
+      <span class="sr-only">Contact</span>
+    </button>
+  </div>
+  <p class="map-hint" data-en="Tap a place to explore" data-es="Toca un lugar para explorar">Tap a place to explore</p>
+</main>
+
+<!-- MEET MÍA -->
+<section id="screen-meet-mia" class="screen">
+  <div class="screen-inner">
+    <button class="back-btn" data-back>
+      <span aria-hidden="true">←</span>
+      <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
+    </button>
+    <p class="eyebrow" data-en="Meet Mía" data-es="Conoce a Mía">Meet Mía</p>
+    <h1 data-en="A five-year-old fighting with joy" data-es="Una niña de cinco años luchando con alegría">A five-year-old fighting with joy</h1>
+    <p data-en="Mía Isabella is five years old. She's playful, she's a princess at heart, and even through treatment for osteosarcoma, she keeps finding reasons to laugh."
+       data-es="Mía Isabella tiene cinco años. Es juguetona, es una princesa de corazón, y aun en tratamiento contra el osteosarcoma, sigue encontrando razones para reír.">
+      Mía Isabella is five years old. She's playful, she's a princess at heart, and even through treatment for osteosarcoma, she keeps finding reasons to laugh.
+    </p>
+    <div class="photo-row">
+      <!-- PLACEHOLDER: fotos reales de "Meet Mía" -->
+      <img src="images/meet-mia-1.jpg" alt="Mía smiling as a baby">
+      <img src="images/meet-mia-2.jpg" alt="Mía with a tiara and stuffed unicorn">
+    </div>
+  </div>
+</section>
+
+<!-- THE VILLAGE -->
+<section id="screen-village" class="screen">
+  <div class="screen-inner">
+    <button class="back-btn" data-back>
+      <span aria-hidden="true">←</span>
+      <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
+    </button>
+    <p class="eyebrow" data-en="The Village" data-es="La Aldea">The Village</p>
+    <h1 data-en="How can I help?" data-es="¿Cómo puedo ayudar?">How can I help?</h1>
+    <p data-en="There are so many ways to be part of Mía's Village." data-es="Hay muchas formas de ser parte de la Aldea de Mía.">There are so many ways to be part of Mía's Village.</p>
+
+    <div class="village-grid">
+      <div class="village-card">
+        <span class="village-icon">🙏</span>
+        <h3 data-en="Pray" data-es="Orar">Pray</h3>
+        <p data-en="Pray for Mía's complete healing, strength and protection." data-es="Ora por la sanidad completa, fortaleza y protección de Mía.">Pray for Mía's complete healing, strength and protection.</p>
+      </div>
+      <div class="village-card">
+        <span class="village-icon">💌</span>
+        <h3 data-en="Encourage" data-es="Dar ánimo">Encourage</h3>
+        <p data-en="Send Mía or her mom a message of love." data-es="Envía a Mía o a su mamá un mensaje cariñoso.">Send Mía or her mom a message of love.</p>
+      </div>
+      <div class="village-card">
+        <span class="village-icon">🍲</span>
+        <h3 data-en="Feed the family" data-es="Alimentar a la familia">Feed the family</h3>
+        <p data-en="Meals, restaurant or grocery gift cards, or a food delivery." data-es="Comidas, tarjetas de regalo de restaurante o mercado, o pedidos a domicilio.">Meals, restaurant or grocery gift cards, or a food delivery.</p>
+      </div>
+      <div class="village-card">
+        <span class="village-icon">⛽</span>
+        <h3 data-en="Keep them moving" data-es="Ayudarlos a moverse">Keep them moving</h3>
+        <p data-en="Gas gift cards for hospital trips." data-es="Tarjetas de regalo de gasolina para citas al hospital.">Gas gift cards for hospital trips.</p>
+      </div>
+      <div class="village-card">
+        <span class="village-icon">🤝</span>
+        <h3 data-en="Support Celpa Clinic" data-es="Apoyar a Celpa Clinic">Support Celpa Clinic</h3>
+        <p data-en="Refer a patient to the family's dental clinic." data-es="Refiere un paciente a la clínica dental de la familia.">Refer a patient to the family's dental clinic.</p>
+      </div>
+      <div class="village-card">
+        <span class="village-icon">🩺</span>
+        <h3 data-en="Share a connection" data-es="Compartir una conexión">Share a connection</h3>
+        <p data-en="Doctors, researchers, specialists, trials or resources." data-es="Médicos, investigadores, especialistas, ensayos o recursos.">Doctors, researchers, specialists, trials or resources.</p>
+      </div>
+      <div class="village-card">
+        <span class="village-icon">💛</span>
+        <h3 data-en="Help with an expense" data-es="Ayudar con un gasto">Help with an expense</h3>
+        <p data-en="Medical and family expenses not covered by insurance." data-es="Gastos médicos y familiares no cubiertos por el seguro.">Medical and family expenses not covered by insurance.</p>
+      </div>
+      <div class="village-card">
+        <span class="village-icon">📲</span>
+        <h3 data-en="Share Mía's story" data-es="Compartir la historia de Mía">Share Mía's story</h3>
+        <p data-en="Help grow the circle of prayer and support." data-es="Ayuda a hacer crecer el círculo de oración y apoyo.">Help grow the circle of prayer and support.</p>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER: links reales de FB y WhatsApp -->
+    <div class="village-actions">
+      <a href="https://www.facebook.com/profile.php?id=PLACEHOLDER" class="btn btn-primary" target="_blank" rel="noopener" data-en="Follow on Facebook" data-es="Síguenos en Facebook">Follow on Facebook</a>
+      <a href="https://chat.whatsapp.com/PLACEHOLDER" class="btn btn-ghost-dark" target="_blank" rel="noopener" data-en="Join WhatsApp Community" data-es="Únete a la Comunidad de WhatsApp">Join WhatsApp Community</a>
+    </div>
+  </div>
+</section>
+
+<!-- THIS WEEK'S NEEDS -->
+<section id="screen-needs" class="screen">
+  <div class="screen-inner">
+    <button class="back-btn" data-back>
+      <span aria-hidden="true">←</span>
+      <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
+    </button>
+    <p class="eyebrow" data-en="This Week's Needs" data-es="Necesidades de esta Semana">This Week's Needs</p>
+    <h1 data-en="What Mía's Village needs right now" data-es="Lo que la Aldea de Mía necesita ahora mismo">What Mía's Village needs right now</h1>
+    <p data-en="Updated by Sonia — check back often." data-es="Actualizado por Sonia — revisa seguido.">Updated by Sonia — check back often.</p>
+    <div id="needs-list" class="needs-list">
+      <p class="needs-empty" data-en="Loading this week's needs…" data-es="Cargando las necesidades de esta semana…">Loading this week's needs…</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLLABORATORS -->
+<section id="screen-collaborators" class="screen">
+  <div class="screen-inner">
+    <button class="back-btn" data-back>
+      <span aria-hidden="true">←</span>
+      <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
+    </button>
+    <p class="eyebrow" data-en="Collaborators" data-es="Colaboradores">Collaborators</p>
+    <h1 data-en="Businesses giving back" data-es="Negocios que retribuyen">Businesses giving back</h1>
+    <p data-en="People in Mía's life who are turning what they do into support for her."
+       data-es="Personas en la vida de Mía que convierten lo que hacen en apoyo para ella.">
+      People in Mía's life who are turning what they do into support for her.
+    </p>
+
+    <div class="collaborator-card">
+      <h3>🎵 Sonia Dueñas — "My Songs"</h3>
+      <p data-en="15 songs, newly recorded with singer-songwriter Gato Guerra. Streaming and downloads generate royalties donated to Mía's medical expenses."
+         data-es="15 canciones, en nueva versión junto al cantautor Gato Guerra. Escucharlas y descargarlas genera regalías donadas a los gastos médicos de Mía.">
+        15 songs, newly recorded with singer-songwriter Gato Guerra. Streaming and downloads generate royalties donated to Mía's medical expenses.
+      </p>
+      <a href="https://open.spotify.com/album/3EVj7jpVZJX8EZEotnQqfG" class="link-arrow" target="_blank" rel="noopener" data-en="Listen on Spotify →" data-es="Escuchar en Spotify →">Listen on Spotify →</a>
+    </div>
+
+    <div class="collaborator-card">
+      <h3>🦷 Dra. Luz Elena Cabrera, DMD</h3>
+      <p data-en="Family &amp; Cosmetic Dentistry of Temple Terrace — half-price dental crowns and other eligible treatments, with proceeds donated directly to Mía's cause."
+         data-es="Family &amp; Cosmetic Dentistry of Temple Terrace — coronas dentales a mitad de precio y otros tratamientos elegibles, con lo recaudado donado directo a la causa de Mía.">
+        Family &amp; Cosmetic Dentistry of Temple Terrace — half-price dental crowns and other eligible treatments, with proceeds donated directly to Mía's cause.
+      </p>
+      <a href="http://www.familyandcosmeticdentistryoftampa.com/" class="link-arrow" target="_blank" rel="noopener" data-en="Visit the clinic →" data-es="Visitar la clínica →">Visit the clinic →</a>
+    </div>
+
+    <div class="celpa-note">
+      <h3>Celpa Clinic</h3>
+      <!-- PLACEHOLDER: texto pendiente de aprobación final de Sonia -->
+      <p>[Pending: final approved text about Celpa Clinic]</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="screen-contact" class="screen">
+  <div class="screen-inner">
+    <button class="back-btn" data-back>
+      <span aria-hidden="true">←</span>
+      <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
+    </button>
+    <p class="eyebrow" data-en="Contact" data-es="Contacto">Contact</p>
+    <h1 data-en="Reach Mía's Village" data-es="Contacta a la Aldea de Mía">Reach Mía's Village</h1>
+    <p data-en="Have a question, a connection to share, or just want to say hello? We'd love to hear from you."
+       data-es="¿Tienes una pregunta, una conexión que compartir, o solo quieres saludar? Nos encantaría saber de ti.">
+      Have a question, a connection to share, or just want to say hello? We'd love to hear from you.
+    </p>
+    <!-- PLACEHOLDER: links reales de FB, WhatsApp, y correo -->
+    <div class="village-actions">
+      <a href="https://www.facebook.com/profile.php?id=PLACEHOLDER" class="btn btn-primary" target="_blank" rel="noopener" data-en="Follow on Facebook" data-es="Síguenos en Facebook">Follow on Facebook</a>
+      <a href="https://chat.whatsapp.com/PLACEHOLDER" class="btn btn-ghost-dark" target="_blank" rel="noopener" data-en="Join WhatsApp Community" data-es="Únete a la Comunidad de WhatsApp">Join WhatsApp Community</a>
+      <a href="mailto:PLACEHOLDER@example.com" class="btn btn-ghost-dark" data-en="Email us" data-es="Escríbenos">Email us</a>
+    </div>
+
+    <p class="footer-tagline" data-en="It Takes a Village. This Is Mía's. 💛" data-es="Se necesita una aldea. Esta es la de Mía. 💛">It Takes a Village. This Is Mía's. 💛</p>
+  </div>
+</section>
+
+<script src="js/app.js"></script>
+<script src="js/needs.js"></script>
+</body>
+</html>

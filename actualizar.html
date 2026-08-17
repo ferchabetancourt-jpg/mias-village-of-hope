@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Update Mía's List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Lato:wght@400;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .update-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 90px 24px 60px;
+  }
+  .update-hi { text-align: center; margin-bottom: 24px; }
+  .split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  @media (min-width: 860px) {
+    .split { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+  .split-col {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(20,33,50,0.06);
+  }
+  .split-col h3 { color: var(--burgundy); margin-top: 0; }
+  iframe { border: none; border-radius: 12px; width: 100%; }
+</style>
+</head>
+<body style="background: var(--cream);">
+
+<header class="app-banner">
+  <div class="banner-inner">
+    <a href="index.html" style="display:flex; align-items:center; gap:8px; text-decoration:none;">
+      <img src="images/emblem.png" alt="Mía's Village of Hope emblem" class="banner-emblem">
+    </a>
+  </div>
+</header>
+
+<div class="update-wrap">
+  <div class="update-hi">
+    <p class="eyebrow">Hi Sonia 💛</p>
+    <h1>What's the status right now?</h1>
+    <p>Here's everything on the list today, and the form to add or update something — side by side.</p>
+  </div>
+
+  <div class="split">
+    <div class="split-col">
+      <h3>Current list</h3>
+      <div id="needs-list" class="needs-list">
+        <p class="needs-empty">Loading the current list…</p>
+      </div>
+    </div>
+    <div class="split-col">
+      <h3>Add or update a need</h3>
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSftyUy15qGrE1eteSaCdoYzDMM6fVVgxhij772HA5VX6rE03Q/viewform?embedded=true"
+        height="900">
+        Loading form…
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<script src="js/needs.js"></script>
+</body>
+</html>
