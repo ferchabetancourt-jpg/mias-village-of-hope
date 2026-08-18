@@ -19,15 +19,14 @@
 <!-- FIXED BANNER -->
 <header class="app-banner">
   <div class="banner-inner">
-    <img src="images/emblem.png" alt="Mía's Village of Hope emblem" class="banner-emblem">
+    <img src="images/banner-logo.png" alt="Mía's Village of Hope" class="banner-logo">
     <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">ES</button>
   </div>
 </header>
 
 <!-- HOME SCREEN — VILLAGE MAP -->
 <main id="screen-home" class="screen screen-home active">
-  <div class="map-wrap">
-    <!-- PLACEHOLDER: images/village-map-desktop.png pendiente — usando la móvil en todos los tamaños por ahora -->
+  <div class="map-wrap map-wrap-mobile">
     <img src="images/village-map-mobile.png" alt="Illustrated map of Mía's Village with five stations along a path" class="map-img">
 
     <button class="hotspot" style="top:11%; left:26%; width:26%; height:14%;" data-target="screen-meet-mia" aria-label="Meet Mía">
@@ -46,6 +45,27 @@
       <span class="sr-only">Contact</span>
     </button>
   </div>
+
+  <div class="map-wrap map-wrap-desktop">
+    <img src="images/village-map-desktop.png" alt="Illustrated map of Mía's Village with five stations along a path" class="map-img">
+
+    <button class="hotspot" style="top:11%; left:7%; width:22%; height:40%;" data-target="screen-meet-mia" aria-label="Meet Mía">
+      <span class="sr-only">Meet Mía</span>
+    </button>
+    <button class="hotspot" style="top:13%; left:29%; width:20%; height:40%;" data-target="screen-village" aria-label="The Village">
+      <span class="sr-only">The Village</span>
+    </button>
+    <button class="hotspot" style="top:28%; left:51%; width:21%; height:26%;" data-target="screen-needs" aria-label="This Week's Needs">
+      <span class="sr-only">This Week's Needs</span>
+    </button>
+    <button class="hotspot" style="top:50%; left:66%; width:22%; height:13%;" data-target="screen-collaborators" aria-label="Collaborators">
+      <span class="sr-only">Collaborators</span>
+    </button>
+    <button class="hotspot" style="top:67%; left:79%; width:10%; height:19%;" data-target="screen-contact" aria-label="Contact">
+      <span class="sr-only">Contact</span>
+    </button>
+  </div>
+
   <p class="map-hint" data-en="Tap a place to explore" data-es="Toca un lugar para explorar">Tap a place to explore</p>
 </main>
 

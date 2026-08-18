@@ -52,7 +52,7 @@ h1, h2, h3 {
   align-items: center;
   justify-content: space-between;
 }
-.banner-emblem { width: 40px; height: 40px; border-radius: 50%; }
+.banner-logo { height: 48px; width: auto; display: block; }
 .lang-toggle {
   background: #fff;
   border: 2px solid var(--gold);
@@ -70,7 +70,7 @@ h1, h2, h3 {
 .screen {
   display: none;
   min-height: 100vh;
-  padding-top: 64px;
+  padding-top: 72px;
 }
 .screen.active { display: block; }
 
@@ -87,6 +87,17 @@ h1, h2, h3 {
   margin: 12px auto 0;
 }
 .map-img { width: 100%; display: block; }
+
+/* Mobile map shown by default; desktop map swaps in on wider screens */
+.map-wrap-desktop { display: none; }
+
+@media (min-width: 860px) {
+  .map-wrap-mobile { display: none; }
+  .map-wrap-desktop {
+    display: block;
+    max-width: 900px;
+  }
+}
 .hotspot {
   position: absolute;
   background: transparent;
