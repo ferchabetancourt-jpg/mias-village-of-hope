@@ -1,20 +1,35 @@
-// App-style navigation: full-screen sections, no scrolling between them.
-const screens = document.querySelectorAll(".screen");
+// App-style navigation: hotspots open a modal window over the map.
+const modal = document.getElementById("village-modal");
+const panels = document.querySelectorAll(".modal-panel");
 const hotspots = document.querySelectorAll(".hotspot");
-const backButtons = document.querySelectorAll("[data-back]");
+const closers = document.querySelectorAll("[data-close]");
 
-function showScreen(id) {
-  screens.forEach(s => s.classList.remove("active"));
+function openModal(id) {
+  panels.forEach(p => p.classList.remove("active"));
   document.getElementById(id).classList.add("active");
-  window.scrollTo(0, 0);
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+  const scrollArea = modal.querySelector(".village-modal-scroll");
+  if (scrollArea) scrollArea.scrollTop = 0;
+}
+
+function closeModal() {
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
 }
 
 hotspots.forEach(btn => {
-  btn.addEventListener("click", () => showScreen(btn.dataset.target));
+  btn.addEventListener("click", () => openModal(btn.dataset.target));
 });
 
-backButtons.forEach(btn => {
-  btn.addEventListener("click", () => showScreen("screen-home"));
+closers.forEach(btn => {
+  btn.addEventListener("click", closeModal);
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && modal.classList.contains("active")) closeModal();
 });
 
 // Language toggle (EN default, ES on tap)

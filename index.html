@@ -82,10 +82,21 @@
   <p class="map-hint" data-en="Tap a place to explore" data-es="Toca un lugar para explorar">Tap a place to explore</p>
 </main>
 
+<!-- VILLAGE MODAL — opens when a station on the map is tapped -->
+<div id="village-modal" class="village-modal" aria-hidden="true">
+  <div class="village-modal-backdrop" data-close></div>
+  <div class="village-modal-card">
+    <img src="images/modal-corner-tl.png" alt="" class="modal-corner modal-corner-tl">
+    <img src="images/modal-corner-tr.png" alt="" class="modal-corner modal-corner-tr">
+    <button class="modal-close" data-close aria-label="Close">
+      <span aria-hidden="true">✕</span>
+    </button>
+    <div class="village-modal-scroll">
+
 <!-- MEET MÍA -->
-<section id="screen-meet-mia" class="screen">
+<section id="screen-meet-mia" class="modal-panel">
   <div class="screen-inner">
-    <button class="back-btn" data-back>
+    <button class="back-btn" data-close>
       <span aria-hidden="true">←</span>
       <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
     </button>
@@ -96,17 +107,17 @@
       Mía Isabella is five years old. She's playful, she's a princess at heart, and even through treatment for osteosarcoma, she keeps finding reasons to laugh.
     </p>
     <div class="photo-row">
-      <!-- PLACEHOLDER: fotos reales de "Meet Mía" -->
-      <img src="images/meet-mia-1.jpg" alt="Mía smiling as a baby">
-      <img src="images/meet-mia-2.jpg" alt="Mía with a tiara and stuffed unicorn">
+      <img src="images/meet-mia-1.webp" alt="Mía at the beach">
+      <img src="images/meet-mia-2.webp" alt="Mía with a tiara and stuffed unicorn">
+      <img src="images/hero-photo.webp" alt="Mía laughing in a chair">
     </div>
   </div>
 </section>
 
 <!-- THE VILLAGE -->
-<section id="screen-village" class="screen">
+<section id="screen-village" class="modal-panel">
   <div class="screen-inner">
-    <button class="back-btn" data-back>
+    <button class="back-btn" data-close>
       <span aria-hidden="true">←</span>
       <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
     </button>
@@ -166,9 +177,9 @@
 </section>
 
 <!-- THIS WEEK'S NEEDS -->
-<section id="screen-needs" class="screen">
+<section id="screen-needs" class="modal-panel">
   <div class="screen-inner">
-    <button class="back-btn" data-back>
+    <button class="back-btn" data-close>
       <span aria-hidden="true">←</span>
       <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
     </button>
@@ -182,9 +193,9 @@
 </section>
 
 <!-- COLLABORATORS -->
-<section id="screen-collaborators" class="screen">
+<section id="screen-collaborators" class="modal-panel">
   <div class="screen-inner">
-    <button class="back-btn" data-back>
+    <button class="back-btn" data-close>
       <span aria-hidden="true">←</span>
       <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
     </button>
@@ -222,9 +233,9 @@
 </section>
 
 <!-- CONTACT -->
-<section id="screen-contact" class="screen">
+<section id="screen-contact" class="modal-panel">
   <div class="screen-inner">
-    <button class="back-btn" data-back>
+    <button class="back-btn" data-close>
       <span aria-hidden="true">←</span>
       <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
     </button>
@@ -244,6 +255,10 @@
     <p class="footer-tagline" data-en="It Takes a Village. This Is Mía's. 💛" data-es="Se necesita una aldea. Esta es la de Mía. 💛">It Takes a Village. This Is Mía's. 💛</p>
   </div>
 </section>
+
+    </div>
+  </div>
+</div>
 
 <script src="js/app.js"></script>
 <script src="js/needs.js"></script>
