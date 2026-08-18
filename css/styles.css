@@ -108,6 +108,7 @@ h1, h2, h3 {
 /* HOME SCREEN — MAP */
 .screen-home {
   display: none;
+  min-height: auto;
   background: linear-gradient(180deg, #EAF3C9 0%, var(--cream) 100%);
   text-align: center;
 }
@@ -116,10 +117,10 @@ h1, h2, h3 {
   position: relative;
   display: inline-block;
   max-width: 480px;
-  max-height: 56vh;
+  max-height: 72vh;
   margin: 12px auto 0;
 }
-.map-img { display: block; width: auto; height: auto; max-width: 100%; max-height: 56vh; }
+.map-img { display: block; width: auto; height: auto; max-width: 100%; max-height: 72vh; }
 
 /* Mobile map shown by default; desktop map swaps in on wider screens */
 .map-wrap-desktop { display: none; }
