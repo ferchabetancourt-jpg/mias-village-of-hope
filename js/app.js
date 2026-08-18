@@ -12,6 +12,10 @@ function openModal(id) {
   document.body.classList.add("modal-open");
   const scrollArea = modal.querySelector(".village-modal-scroll");
   if (scrollArea) scrollArea.scrollTop = 0;
+  // Reprocesa el embed de Instagram cada vez que se abre un panel —
+  // si no, el reel puede quedar en blanco porque el panel estaba
+  // oculto (display:none) cuando el script de Instagram cargó.
+  if (window.instgrm) window.instgrm.Embeds.process();
 }
 
 function closeModal() {
@@ -49,3 +53,22 @@ langBtn.addEventListener("click", () => {
   currentLang = currentLang === "en" ? "es" : "en";
   applyLang(currentLang);
 });
+
+// Audio de Mía — play/pause, sin autoplay
+const miaAudio = document.getElementById("mia-audio");
+const miaAudioBtn = document.getElementById("mia-audio-btn");
+if (miaAudio && miaAudioBtn) {
+  const icon = miaAudioBtn.querySelector(".mia-audio-icon");
+  miaAudioBtn.addEventListener("click", () => {
+    if (miaAudio.paused) {
+      miaAudio.play();
+      icon.textContent = "⏸️";
+    } else {
+      miaAudio.pause();
+      icon.textContent = "🔊";
+    }
+  });
+  miaAudio.addEventListener("ended", () => {
+    icon.textContent = "🔊";
+  });
+}

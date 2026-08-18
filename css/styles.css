@@ -416,6 +416,63 @@ body.modal-open { overflow: hidden; }
   margin-top: 40px;
 }
 
+/* MÍA AUDIO PLAYER */
+.mia-audio { margin-top: 28px; text-align: center; }
+#mia-audio-btn { display: inline-flex; align-items: center; gap: 8px; }
+.mia-audio-icon { font-size: 1.1rem; }
+
+/* COLLABORATOR EXTRAS — photo + quote */
+.collaborator-photo {
+  width: 100%;
+  max-width: 220px;
+  display: block;
+  margin: 0 auto 14px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(20,33,50,0.15);
+}
+.collaborator-quote {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #555;
+  background: rgba(218,161,41,0.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin: 12px 0;
+}
+
+/* CONTACT — icon buttons */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+.contact-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 18px 12px;
+  text-decoration: none;
+  box-shadow: 0 3px 12px rgba(20,33,50,0.08);
+  border: 1px solid rgba(218,161,41,0.25);
+  transition: transform 0.15s ease;
+}
+.contact-btn:hover { transform: translateY(-2px); }
+.contact-btn:active { transform: scale(0.96); }
+.contact-btn img.contact-icon { width: 44px; height: 44px; }
+.contact-btn span {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--navy);
+  text-align: center;
+}
+
 /* Focus states */
 a:focus-visible, button:focus-visible {
   outline: 3px solid var(--gold);
