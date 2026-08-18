@@ -72,3 +72,19 @@ if (miaAudio && miaAudioBtn) {
     icon.textContent = "🔊";
   });
 }
+
+// Luciérnagas — solo en la pantalla del mapa (screen-home)
+function createFireflies(containerSelector, count) {
+  document.querySelectorAll(containerSelector).forEach(container => {
+    for (let i = 0; i < count; i++) {
+      const f = document.createElement("span");
+      f.className = "firefly";
+      f.style.left = (Math.random() * 88 + 4).toFixed(1) + "%";
+      f.style.top = (Math.random() * 82 + 4).toFixed(1) + "%";
+      f.style.animationDelay = (Math.random() * 6).toFixed(2) + "s, " + (Math.random() * 3).toFixed(2) + "s";
+      f.style.animationDuration = (6 + Math.random() * 4).toFixed(2) + "s, " + (2.5 + Math.random() * 2).toFixed(2) + "s";
+      container.appendChild(f);
+    }
+  });
+}
+createFireflies(".map-wrap", 14);

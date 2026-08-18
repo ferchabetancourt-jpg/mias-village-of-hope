@@ -150,6 +150,30 @@ h1, h2, h3 {
   margin: 12px 0 24px;
 }
 
+/* FIREFLIES — floating golden lights over the village map */
+.firefly {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 6px 2px rgba(218,161,41,0.85);
+  opacity: 0;
+  pointer-events: none;
+  animation: firefly-move ease-in-out infinite, firefly-glow ease-in-out infinite;
+}
+@keyframes firefly-glow {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+@keyframes firefly-move {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(9px, -13px); }
+  50%  { transform: translate(-7px, -5px); }
+  75%  { transform: translate(6px, 9px); }
+  100% { transform: translate(0, 0); }
+}
+
 /* VILLAGE MODAL — "Ventana de la Aldea" */
 body.modal-open { overflow: hidden; }
 
@@ -481,4 +505,5 @@ a:focus-visible, button:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
+  .firefly { display: none; }
 }
