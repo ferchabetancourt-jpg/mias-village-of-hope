@@ -52,7 +52,20 @@ h1, h2, h3 {
   align-items: center;
   justify-content: space-between;
 }
-.banner-logo { height: 64px; width: auto; display: block; }
+.banner-brand { display: flex; align-items: center; gap: 10px; }
+.banner-icon { height: 44px; width: auto; display: block; }
+.banner-title {
+  font-family: var(--font-script);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  white-space: nowrap;
+}
+@media (max-width: 380px) {
+  .banner-icon { height: 34px; }
+  .banner-title { font-size: 1.25rem; }
+}
 .lang-toggle {
   background: #fff;
   border: 2px solid var(--gold);
@@ -70,7 +83,7 @@ h1, h2, h3 {
 .screen {
   display: none;
   min-height: 100vh;
-  padding-top: 92px;
+  padding-top: 68px;
 }
 .screen.active { display: block; }
 
