@@ -52,7 +52,7 @@ h1, h2, h3 {
   align-items: center;
   justify-content: space-between;
 }
-.banner-logo { height: 48px; width: auto; display: block; }
+.banner-logo { height: 64px; width: auto; display: block; }
 .lang-toggle {
   background: #fff;
   border: 2px solid var(--gold);
@@ -70,7 +70,7 @@ h1, h2, h3 {
 .screen {
   display: none;
   min-height: 100vh;
-  padding-top: 72px;
+  padding-top: 92px;
 }
 .screen.active { display: block; }
 
