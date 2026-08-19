@@ -189,23 +189,51 @@ h1, h2, h3 {
   flex-shrink: 0;
 }
 
-/* SPARKLES — twinkling golden light points over the village map.
+/* SPARKLES — twinkling golden light points along the village path.
    Replaces the earlier butterfly effect: fixed gold color (no CSS
    variable inside SVG, no emoji-rendering differences across phones)
-   and visually matches the existing golden light sweep. */
+   and visually matches the existing golden light sweep. Positions are
+   generated from the actual path between stations (see buildGoldenPath
+   in app.js) instead of scattered randomly, so they never float over
+   open sky or rooftops. A small white core is layered under the gold
+   glow so they read clearly against both bright and dark art. */
 .sparkle {
   position: absolute;
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: var(--gold);
-  box-shadow: 0 0 7px 2px rgba(218,161,41,0.85);
+  box-shadow: 0 0 2px 1px rgba(255,255,255,0.9), 0 0 9px 3px rgba(218,161,41,0.85);
   pointer-events: none;
   animation: sparkle-twinkle ease-in-out infinite;
 }
 @keyframes sparkle-twinkle {
   0%, 100% { opacity: 0; transform: scale(0.4); }
   50%      { opacity: 1; transform: scale(1.3); }
+}
+
+/* GOLDEN PATH OF LIGHT — thin glowing trail that flows along the same
+   station-to-station route as the sparkles, tying the map's stops
+   together into one visible journey. */
+.golden-path-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.golden-path {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 2 15;
+  filter: drop-shadow(0 0 4px rgba(218,161,41,0.85));
+  opacity: 0.8;
+  animation: golden-path-flow 2.8s linear infinite;
+}
+@keyframes golden-path-flow {
+  to { stroke-dashoffset: -34; }
 }
 
 /* VILLAGE MODAL — "Ventana de la Aldea" */
@@ -420,6 +448,13 @@ body.modal-open { overflow: hidden; }
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .btn-primary { background: var(--burgundy); color: #fff; }
+
+/* Gentle pulse on the onboarding call-to-action buttons, inviting the tap */
+@keyframes btn-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(218,161,41,0.55); }
+  50%      { box-shadow: 0 0 0 11px rgba(218,161,41,0); }
+}
+.onboarding-step.active .btn-primary { animation: btn-pulse 2.2s ease-out infinite; }
 .btn-ghost-dark { background: transparent; color: var(--burgundy); border: 2px solid var(--burgundy); }
 
 /* Click feedback — applies to all interactive buttons across the site */
@@ -541,6 +576,8 @@ a:focus-visible, button:focus-visible {
   * { transition: none !important; }
   .sparkle, .map-sweep { display: none; }
   .map-img { animation: none !important; opacity: 1; transform: none; }
+  .golden-path { animation: none !important; stroke-dasharray: none; }
+  .onboarding-step.active .btn-primary { animation: none !important; }
 }
 
 /* ============================================================
