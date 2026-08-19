@@ -37,8 +37,52 @@
   </div>
 </header>
 
+<!-- ONBOARDING — SCREEN 1: the window -->
+<section id="screen-onboarding-1" class="screen screen-onboarding active">
+  <div class="onboarding-inner">
+    <div class="onboarding-frame">
+      <img src="images/village-window-frame.png" alt="" class="onboarding-frame-img">
+      <img src="images/hero-photo.webp" alt="Mía laughing" class="onboarding-photo">
+    </div>
+    <h1 class="onboarding-title">
+      <span class="onboarding-title-script">Mía's</span>
+      <span class="onboarding-title-bold">Village of Hope</span>
+    </h1>
+    <p class="onboarding-tagline" data-en="It Takes a Village. This Is Mía's." data-es="Se necesita una aldea. Esta es la de Mía.">It Takes a Village. This Is Mía's.</p>
+    <button class="btn btn-primary onboarding-next" data-next="screen-onboarding-2" data-en="Enter" data-es="Entrar">Enter</button>
+  </div>
+</section>
+
+<!-- ONBOARDING — SCREEN 2: the invitation -->
+<section id="screen-onboarding-2" class="screen screen-onboarding">
+  <div class="onboarding-inner">
+    <img src="images/banner-icon.png" alt="" class="onboarding-emblem">
+    <p class="onboarding-text" data-en="Mía is 5 years old, fighting with all her heart. Here you can pray for her, cheer her on, and be part of her village — in whatever way you can." data-es="Mía tiene 5 años y está luchando con todo su corazón. Aquí puedes orar por ella, animarla, y ser parte de su aldea — de la forma que tú puedas.">Mía is 5 years old, fighting with all her heart. Here you can pray for her, cheer her on, and be part of her village — in whatever way you can.</p>
+    <button class="btn btn-primary onboarding-next" data-next="screen-onboarding-3" data-en="Meet Mía" data-es="Conocer a Mía">Meet Mía</button>
+  </div>
+</section>
+
+<!-- ONBOARDING — SCREEN 3: how it works -->
+<section id="screen-onboarding-3" class="screen screen-onboarding">
+  <div class="onboarding-inner">
+    <p class="onboarding-howto-title" data-en="Tap each place in the village to take part:" data-es="Toca cada lugar de la aldea para participar:">Tap each place in the village to take part:</p>
+    <ul class="onboarding-list">
+      <li><span aria-hidden="true">🏠</span> <span data-en="Meet Mía — get to know her" data-es="Meet Mía — conócela a ella">Meet Mía — get to know her</span></li>
+      <li><span aria-hidden="true">💛</span> <span data-en="The Village — ways to help" data-es="The Village — formas de ayudar">The Village — ways to help</span></li>
+      <li><span aria-hidden="true">📋</span> <span data-en="This Week's Needs — what's needed today" data-es="This Week's Needs — lo que se necesita hoy">This Week's Needs — what's needed today</span></li>
+      <li><span aria-hidden="true">🤝</span> <span data-en="Collaborators — who's already helping" data-es="Collaborators — quienes ya se suman">Collaborators — who's already helping</span></li>
+      <li><span aria-hidden="true">📞</span> <span data-en="Contact — how to reach us" data-es="Contact — cómo comunicarte">Contact — how to reach us</span></li>
+    </ul>
+    <label class="onboarding-checkbox">
+      <input type="checkbox" id="onboarding-hide-checkbox">
+      <span data-en="Don't show this again" data-es="No volver a mostrar esto">Don't show this again</span>
+    </label>
+    <button class="btn btn-primary" id="onboarding-enter-btn" data-en="Enter the Village" data-es="Ir a la Aldea">Enter the Village</button>
+  </div>
+</section>
+
 <!-- HOME SCREEN — VILLAGE MAP -->
-<main id="screen-home" class="screen screen-home active">
+<main id="screen-home" class="screen screen-home">
   <div class="map-stage">
   <div class="map-wrap map-wrap-mobile">
     <img src="images/village-map-mobile.png" alt="Illustrated map of Mía's Village with five stations along a path" class="map-img">
@@ -164,8 +208,13 @@
       <span aria-hidden="true">←</span>
       <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
     </button>
-    <p class="eyebrow" data-en="The Village" data-es="La Aldea">The Village</p>
-    <h1 data-en="How can I help?" data-es="¿Cómo puedo ayudar?">How can I help?</h1>
+    <div class="station-header">
+      <img src="images/polaroid-village.webp" alt="Mía in her witch costume" class="station-polaroid rot-a">
+      <div>
+        <p class="eyebrow" data-en="The Village" data-es="La Aldea">The Village</p>
+        <h1 data-en="How can I help?" data-es="¿Cómo puedo ayudar?">How can I help?</h1>
+      </div>
+    </div>
     <p data-en="There are so many ways to be part of Mía's Village." data-es="Hay muchas formas de ser parte de la Aldea de Mía.">There are so many ways to be part of Mía's Village.</p>
 
     <div class="village-grid">
@@ -226,8 +275,13 @@
       <span aria-hidden="true">←</span>
       <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
     </button>
-    <p class="eyebrow" data-en="This Week's Needs" data-es="Necesidades de esta Semana">This Week's Needs</p>
-    <h1 data-en="What Mía's Village needs right now" data-es="Lo que la Aldea de Mía necesita ahora mismo">What Mía's Village needs right now</h1>
+    <div class="station-header">
+      <img src="images/polaroid-needs.webp" alt="Mía with her teddy bear at the hospital" class="station-polaroid rot-b">
+      <div>
+        <p class="eyebrow" data-en="This Week's Needs" data-es="Necesidades de esta Semana">This Week's Needs</p>
+        <h1 data-en="What Mía's Village needs right now" data-es="Lo que la Aldea de Mía necesita ahora mismo">What Mía's Village needs right now</h1>
+      </div>
+    </div>
     <p data-en="Updated by Sonia — check back often." data-es="Actualizado por Sonia — revisa seguido.">Updated by Sonia — check back often.</p>
     <div id="needs-list" class="needs-list">
       <p class="needs-empty" data-en="Loading this week's needs…" data-es="Cargando las necesidades de esta semana…">Loading this week's needs…</p>
@@ -242,8 +296,13 @@
       <span aria-hidden="true">←</span>
       <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
     </button>
-    <p class="eyebrow" data-en="Collaborators" data-es="Colaboradores">Collaborators</p>
-    <h1 data-en="Businesses giving back" data-es="Negocios que retribuyen">Businesses giving back</h1>
+    <div class="station-header">
+      <img src="images/polaroid-collaborators.webp" alt="Mía at the aquarium" class="station-polaroid rot-a">
+      <div>
+        <p class="eyebrow" data-en="Collaborators" data-es="Colaboradores">Collaborators</p>
+        <h1 data-en="Businesses giving back" data-es="Negocios que retribuyen">Businesses giving back</h1>
+      </div>
+    </div>
     <p data-en="People in Mía's life who are turning what they do into support for her."
        data-es="Personas en la vida de Mía que convierten lo que hacen en apoyo para ella.">
       People in Mía's life who are turning what they do into support for her.
@@ -295,8 +354,13 @@
       <span aria-hidden="true">←</span>
       <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
     </button>
-    <p class="eyebrow" data-en="Contact" data-es="Contacto">Contact</p>
-    <h1 data-en="Reach Mía's Village" data-es="Contacta a la Aldea de Mía">Reach Mía's Village</h1>
+    <div class="station-header">
+      <img src="images/polaroid-contact.webp" alt="Mía riding a carousel horse" class="station-polaroid rot-b">
+      <div>
+        <p class="eyebrow" data-en="Contact" data-es="Contacto">Contact</p>
+        <h1 data-en="Reach Mía's Village" data-es="Contacta a la Aldea de Mía">Reach Mía's Village</h1>
+      </div>
+    </div>
     <p data-en="Have a question, a connection to share, or just want to say hello? We'd love to hear from you."
        data-es="¿Tienes una pregunta, una conexión que compartir, o solo quieres saludar? Nos encantaría saber de ti.">
       Have a question, a connection to share, or just want to say hello? We'd love to hear from you.

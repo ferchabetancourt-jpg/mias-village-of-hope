@@ -73,23 +73,57 @@ if (miaAudio && miaAudioBtn) {
   });
 }
 
-// Mariposas — solo en la pantalla del mapa (screen-home)
-// Usamos el emoji 🦋 en vez de SVG con color dinámico: el color por
-// variable CSS dentro de un SVG no siempre se ve bien en Safari de
-// iPhone. El emoji nativo se ve igual en todos los celulares.
-function createButterflies(containerSelector, count) {
+// Destellos de luz dorada — solo en la pantalla del mapa (screen-home).
+// Reemplaza el efecto de mariposas: color fijo (no variable CSS), sin
+// depender de que el navegador renderice un emoji — mismo enfoque
+// seguro que ya usamos para el barrido de luz (.map-sweep).
+function createSparkles(containerSelector, count) {
   document.querySelectorAll(containerSelector).forEach(container => {
     for (let i = 0; i < count; i++) {
-      const b = document.createElement("span");
-      b.className = "butterfly";
-      b.textContent = "🦋";
-      b.style.fontSize = (16 + Math.random() * 10).toFixed(0) + "px";
-      b.style.left = (Math.random() * 82 + 4).toFixed(1) + "%";
-      b.style.top = (Math.random() * 74 + 4).toFixed(1) + "%";
-      b.style.animationDelay = (Math.random() * 6).toFixed(2) + "s";
-      b.style.animationDuration = (7 + Math.random() * 4).toFixed(2) + "s";
-      container.appendChild(b);
+      const s = document.createElement("span");
+      s.className = "sparkle";
+      s.style.left = (Math.random() * 90 + 3).toFixed(1) + "%";
+      s.style.top = (Math.random() * 88 + 4).toFixed(1) + "%";
+      s.style.animationDelay = (Math.random() * 4).toFixed(2) + "s";
+      s.style.animationDuration = (2 + Math.random() * 2).toFixed(2) + "s";
+      container.appendChild(s);
     }
   });
 }
-createButterflies(".map-wrap", 8);
+createSparkles(".map-wrap", 9);
+
+// ============================================================
+// ONBOARDING — 3 short screens shown before the map.
+// By default it shows EVERY visit (helps returning visitors who
+// forget what the 5 stations are). If someone checks "Don't show
+// this again", it's skipped from then on (localStorage).
+// ============================================================
+const ONBOARDING_HIDE_KEY = "mia_onboarding_hide";
+
+function showTopScreen(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  const target = document.getElementById(id);
+  if (target) target.classList.add("active");
+}
+
+document.querySelectorAll(".onboarding-next").forEach(btn => {
+  btn.addEventListener("click", () => showTopScreen(btn.dataset.next));
+});
+
+const onboardingEnterBtn = document.getElementById("onboarding-enter-btn");
+const onboardingHideCheckbox = document.getElementById("onboarding-hide-checkbox");
+if (onboardingEnterBtn) {
+  onboardingEnterBtn.addEventListener("click", () => {
+    if (onboardingHideCheckbox && onboardingHideCheckbox.checked) {
+      localStorage.setItem(ONBOARDING_HIDE_KEY, "true");
+    }
+    showTopScreen("screen-home");
+  });
+}
+
+// Decide what to show first, as soon as the script runs.
+if (localStorage.getItem(ONBOARDING_HIDE_KEY) === "true") {
+  showTopScreen("screen-home");
+} else {
+  showTopScreen("screen-onboarding-1");
+}
