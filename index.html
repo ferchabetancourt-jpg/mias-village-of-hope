@@ -37,47 +37,49 @@
   </div>
 </header>
 
-<!-- ONBOARDING — SCREEN 1: the window -->
-<section id="screen-onboarding-1" class="screen screen-onboarding active">
+<!-- ONBOARDING — one fixed screen (window + photo never move); 3 steps
+     of content swap underneath it -->
+<section id="screen-onboarding" class="screen screen-onboarding active">
   <div class="onboarding-inner">
+
     <div class="onboarding-frame">
-      <img src="images/village-window-frame.png" alt="" class="onboarding-frame-img">
       <img src="images/hero-photo.webp" alt="Mía laughing" class="onboarding-photo">
+      <img src="images/village-window-frame-clean.webp" alt="" class="onboarding-frame-img">
     </div>
-    <h1 class="onboarding-title">
-      <span class="onboarding-title-script">Mía's</span>
-      <span class="onboarding-title-bold">Village of Hope</span>
-    </h1>
-    <p class="onboarding-tagline" data-en="It Takes a Village. This Is Mía's." data-es="Se necesita una aldea. Esta es la de Mía.">It Takes a Village. This Is Mía's.</p>
-    <button class="btn btn-primary onboarding-next" data-next="screen-onboarding-2" data-en="Enter" data-es="Entrar">Enter</button>
-  </div>
-</section>
 
-<!-- ONBOARDING — SCREEN 2: the invitation -->
-<section id="screen-onboarding-2" class="screen screen-onboarding">
-  <div class="onboarding-inner">
-    <img src="images/banner-icon.png" alt="" class="onboarding-emblem">
-    <p class="onboarding-text" data-en="Mía is 5 years old, fighting with all her heart. Here you can pray for her, cheer her on, and be part of her village — in whatever way you can." data-es="Mía tiene 5 años y está luchando con todo su corazón. Aquí puedes orar por ella, animarla, y ser parte de su aldea — de la forma que tú puedas.">Mía is 5 years old, fighting with all her heart. Here you can pray for her, cheer her on, and be part of her village — in whatever way you can.</p>
-    <button class="btn btn-primary onboarding-next" data-next="screen-onboarding-3" data-en="Meet Mía" data-es="Conocer a Mía">Meet Mía</button>
-  </div>
-</section>
+    <!-- STEP 1 -->
+    <div class="onboarding-step active" id="onboarding-step-1">
+      <h1 class="onboarding-title">
+        <span class="onboarding-title-script">Mía's</span>
+        <span class="onboarding-title-bold">Village of Hope</span>
+      </h1>
+      <p class="onboarding-tagline" data-en="It Takes a Village. This Is Mía's." data-es="Se necesita una aldea. Esta es la de Mía.">It Takes a Village. This Is Mía's.</p>
+      <button class="btn btn-primary onboarding-next" data-next="onboarding-step-2" data-en="Enter" data-es="Entrar">Enter</button>
+    </div>
 
-<!-- ONBOARDING — SCREEN 3: how it works -->
-<section id="screen-onboarding-3" class="screen screen-onboarding">
-  <div class="onboarding-inner">
-    <p class="onboarding-howto-title" data-en="Tap each place in the village to take part:" data-es="Toca cada lugar de la aldea para participar:">Tap each place in the village to take part:</p>
-    <ul class="onboarding-list">
-      <li><span aria-hidden="true">🏠</span> <span data-en="Meet Mía — get to know her" data-es="Meet Mía — conócela a ella">Meet Mía — get to know her</span></li>
-      <li><span aria-hidden="true">💛</span> <span data-en="The Village — ways to help" data-es="The Village — formas de ayudar">The Village — ways to help</span></li>
-      <li><span aria-hidden="true">📋</span> <span data-en="This Week's Needs — what's needed today" data-es="This Week's Needs — lo que se necesita hoy">This Week's Needs — what's needed today</span></li>
-      <li><span aria-hidden="true">🤝</span> <span data-en="Collaborators — who's already helping" data-es="Collaborators — quienes ya se suman">Collaborators — who's already helping</span></li>
-      <li><span aria-hidden="true">📞</span> <span data-en="Contact — how to reach us" data-es="Contact — cómo comunicarte">Contact — how to reach us</span></li>
-    </ul>
-    <label class="onboarding-checkbox">
-      <input type="checkbox" id="onboarding-hide-checkbox">
-      <span data-en="Don't show this again" data-es="No volver a mostrar esto">Don't show this again</span>
-    </label>
-    <button class="btn btn-primary" id="onboarding-enter-btn" data-en="Enter the Village" data-es="Ir a la Aldea">Enter the Village</button>
+    <!-- STEP 2 -->
+    <div class="onboarding-step" id="onboarding-step-2">
+      <p class="onboarding-text" data-en="Mía is 5 years old, fighting with all her heart. Here you can pray for her, cheer her on, and be part of her village — in whatever way you can." data-es="Mía tiene 5 años y está luchando con todo su corazón. Aquí puedes orar por ella, animarla, y ser parte de su aldea — de la forma que tú puedas.">Mía is 5 years old, fighting with all her heart. Here you can pray for her, cheer her on, and be part of her village — in whatever way you can.</p>
+      <button class="btn btn-primary onboarding-next" data-next="onboarding-step-3" data-en="Meet Mía" data-es="Conocer a Mía">Meet Mía</button>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="onboarding-step" id="onboarding-step-3">
+      <p class="onboarding-howto-title" data-en="Tap each place in the village to take part:" data-es="Toca cada lugar de la aldea para participar:">Tap each place in the village to take part:</p>
+      <ul class="onboarding-list">
+        <li><img src="images/icon-meetmia.webp" alt="" class="onboarding-list-icon"> <span data-en="Meet Mía — get to know her" data-es="Meet Mía — conócela a ella">Meet Mía — get to know her</span></li>
+        <li><img src="images/icon-village.webp" alt="" class="onboarding-list-icon"> <span data-en="The Village — ways to help" data-es="The Village — formas de ayudar">The Village — ways to help</span></li>
+        <li><img src="images/icon-needs.webp" alt="" class="onboarding-list-icon"> <span data-en="This Week's Needs — what's needed today" data-es="This Week's Needs — lo que se necesita hoy">This Week's Needs — what's needed today</span></li>
+        <li><img src="images/icon-collaborators.webp" alt="" class="onboarding-list-icon"> <span data-en="Collaborators — who's already helping" data-es="Collaborators — quienes ya se suman">Collaborators — who's already helping</span></li>
+        <li><img src="images/icon-contact.webp" alt="" class="onboarding-list-icon"> <span data-en="Contact — how to reach us" data-es="Contact — cómo comunicarte">Contact — how to reach us</span></li>
+      </ul>
+      <label class="onboarding-checkbox">
+        <input type="checkbox" id="onboarding-hide-checkbox">
+        <span data-en="Don't show this again" data-es="No volver a mostrar esto">Don't show this again</span>
+      </label>
+      <button class="btn btn-primary" id="onboarding-enter-btn" data-en="Enter the Village" data-es="Ir a la Aldea">Enter the Village</button>
+    </div>
+
   </div>
 </section>
 

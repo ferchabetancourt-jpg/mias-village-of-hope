@@ -93,10 +93,9 @@ function createSparkles(containerSelector, count) {
 createSparkles(".map-wrap", 9);
 
 // ============================================================
-// ONBOARDING — 3 short screens shown before the map.
-// By default it shows EVERY visit (helps returning visitors who
-// forget what the 5 stations are). If someone checks "Don't show
-// this again", it's skipped from then on (localStorage).
+// ONBOARDING — one fixed screen (window + photo never move).
+// 3 steps of content swap underneath it. Shows every visit by
+// default; "Don't show this again" skips it from then on.
 // ============================================================
 const ONBOARDING_HIDE_KEY = "mia_onboarding_hide";
 
@@ -106,8 +105,14 @@ function showTopScreen(id) {
   if (target) target.classList.add("active");
 }
 
+function showOnboardingStep(id) {
+  document.querySelectorAll(".onboarding-step").forEach(s => s.classList.remove("active"));
+  const target = document.getElementById(id);
+  if (target) target.classList.add("active");
+}
+
 document.querySelectorAll(".onboarding-next").forEach(btn => {
-  btn.addEventListener("click", () => showTopScreen(btn.dataset.next));
+  btn.addEventListener("click", () => showOnboardingStep(btn.dataset.next));
 });
 
 const onboardingEnterBtn = document.getElementById("onboarding-enter-btn");
@@ -125,5 +130,5 @@ if (onboardingEnterBtn) {
 if (localStorage.getItem(ONBOARDING_HIDE_KEY) === "true") {
   showTopScreen("screen-home");
 } else {
-  showTopScreen("screen-onboarding-1");
+  showTopScreen("screen-onboarding");
 }
