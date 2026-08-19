@@ -106,11 +106,12 @@ function hotspotCenters(wrap) {
   });
 }
 
-// Punto medio entre dos estaciones, desplazado perpendicularmente para
-// que el camino se sienta sinuoso en vez de una línea recta entre postes.
-function jitteredMidpoint(a, b, sign) {
-  const mx = (a.x + b.x) / 2;
-  const my = (a.y + b.y) / 2;
+// Punto sobre el segmento a-b (en la fracción t), desplazado
+// perpendicularmente para que el camino se sienta sinuoso en vez de una
+// línea recta entre estaciones.
+function jitteredPoint(a, b, t, sign) {
+  const mx = a.x + (b.x - a.x) * t;
+  const my = a.y + (b.y - a.y) * t;
   const dx = b.x - a.x;
   const dy = b.y - a.y;
   const len = Math.hypot(dx, dy) || 1;
@@ -120,12 +121,18 @@ function jitteredMidpoint(a, b, sign) {
   return { x: mx + px * jitter * sign, y: my + py * jitter * sign };
 }
 
+// Dos puntos intermedios por tramo (en vez de uno) para que haya más
+// destellos a lo largo del camino — antes eran 9 en total (muy
+// disperso), ahora 13.
 function pathPoints(centers) {
   const points = [];
   centers.forEach((center, i) => {
     points.push(center);
     if (i < centers.length - 1) {
-      points.push(jitteredMidpoint(center, centers[i + 1], i % 2 === 0 ? 1 : -1));
+      const next = centers[i + 1];
+      const sign = i % 2 === 0 ? 1 : -1;
+      points.push(jitteredPoint(center, next, 0.33, sign));
+      points.push(jitteredPoint(center, next, 0.66, -sign));
     }
   });
   return points;
@@ -154,7 +161,7 @@ function buildGoldenPath(wrap) {
   const rect = wrap.getBoundingClientRect();
   if (!rect.width || !rect.height) return; // oculto en este breakpoint
 
-  wrap.querySelectorAll(".sparkle, .golden-path-svg").forEach(el => el.remove());
+  wrap.querySelectorAll(".sparkle, .golden-path-svg, .golden-pulse").forEach(el => el.remove());
 
   const centers = hotspotCenters(wrap);
   if (centers.length < 2) return;
@@ -178,6 +185,14 @@ function buildGoldenPath(wrap) {
   path.setAttribute("pathLength", "100");
   svg.appendChild(path);
   wrap.appendChild(svg);
+
+  // Punto de luz que viaja en loop por el mismo trazo — el efecto de
+  // movimiento visible que conecta las 5 estaciones (no solo la línea
+  // estática de fondo).
+  const pulse = document.createElement("span");
+  pulse.className = "golden-pulse";
+  pulse.style.offsetPath = `path('${d}')`;
+  wrap.appendChild(pulse);
 
   points.forEach(p => {
     const s = document.createElementNS(SVG_NS, "svg");
@@ -223,10 +238,19 @@ function showTopScreen(id) {
   if (id === "screen-home") buildGoldenPaths();
 }
 
+const onboardingFrameImg = document.querySelector(".onboarding-frame-img");
+
 function showOnboardingStep(id) {
   document.querySelectorAll(".onboarding-step").forEach(s => s.classList.remove("active"));
   const target = document.getElementById(id);
   if (target) target.classList.add("active");
+  // El pulso alrededor del marco solo corre en el paso 1 (primera
+  // impresión). Se controla con una clase por JS en vez de un
+  // selector :has() en CSS: :has() no lo soportan todos los
+  // navegadores, y ahí la regla entera se invalida sin aviso.
+  if (onboardingFrameImg) {
+    onboardingFrameImg.classList.toggle("frame-pulse", id === "onboarding-step-1");
+  }
 }
 
 document.querySelectorAll(".onboarding-next").forEach(btn => {
@@ -243,6 +267,11 @@ if (onboardingEnterBtn) {
     showTopScreen("screen-home");
   });
 }
+
+// El paso 1 ya viene marcado "active" en el HTML estático, pero el
+// pulso del marco depende de la clase que pone esta función — sin
+// esta llamada no arranca hasta el primer click en "Enter".
+showOnboardingStep("onboarding-step-1");
 
 // Decide what to show first, as soon as the script runs.
 if (localStorage.getItem(ONBOARDING_HIDE_KEY) === "true") {

@@ -195,26 +195,29 @@ h1, h2, h3 {
    circle, so they read as "estrellitas brillantes" and not flat gold
    blobs. Positions come from the actual path between stations (see
    buildGoldenPath in app.js) instead of scattered randomly, so they
-   never float over open sky or rooftops. The opacity floor is raised
-   so they stay faintly visible instead of disappearing at each cycle. */
+   never float over open sky or rooftops. Sized up and with a higher
+   opacity floor + stronger double glow so they stay clearly visible
+   against the busy, already-golden artwork instead of blending in. */
 .sparkle {
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
   fill: #fff;
-  filter: drop-shadow(0 0 4px rgba(218,161,41,0.95));
+  filter: drop-shadow(0 0 3px rgba(255,255,255,0.9)) drop-shadow(0 0 9px rgba(218,161,41,1));
   pointer-events: none;
   transform: translate(-50%, -50%);
   animation: sparkle-twinkle ease-in-out infinite;
 }
 @keyframes sparkle-twinkle {
-  0%, 100% { opacity: 0.35; transform: translate(-50%, -50%) scale(0.55); }
-  50%      { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+  0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.6); }
+  50%      { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
 }
 
-/* GOLDEN PATH OF LIGHT — thin glowing trail connecting the 5 stations,
-   drawn once as the map loads (like the existing .map-sweep reveal)
-   rather than looping forever. */
+/* GOLDEN PATH OF LIGHT — connects the 5 stations. A subtle static line
+   marks the route (drawn in once as the map loads, like .map-sweep),
+   and a bright pulse keeps traveling along it afterward in a loop —
+   the "efecto de movimiento visible" is the ongoing pulse, not the
+   base line, which stays put so the route is legible at rest. */
 .golden-path-svg {
   position: absolute;
   inset: 0;
@@ -228,13 +231,35 @@ h1, h2, h3 {
   stroke-width: 3;
   stroke-linecap: round;
   filter: drop-shadow(0 0 4px rgba(218,161,41,0.85));
-  opacity: 0.85;
+  opacity: 0.4;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   animation: golden-path-draw 1.8s ease-out 0.5s 1 forwards;
 }
 @keyframes golden-path-draw {
   to { stroke-dashoffset: 0; }
+}
+
+.golden-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, var(--gold) 65%, rgba(218,161,41,0) 100%);
+  box-shadow: 0 0 12px 4px rgba(218,161,41,0.9);
+  pointer-events: none;
+  opacity: 0;
+  offset-distance: 0%;
+  animation: golden-pulse-travel 4.5s linear 2.3s infinite;
+}
+@keyframes golden-pulse-travel {
+  0%   { offset-distance: 0%; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
 }
 
 /* VILLAGE MODAL — "Ventana de la Aldea" */
@@ -568,9 +593,9 @@ a:focus-visible, button:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
-  .sparkle, .map-sweep { display: none; }
+  .sparkle, .map-sweep, .golden-pulse { display: none; }
   .map-img { animation: none !important; opacity: 1; transform: none; }
-  .golden-path { animation: none !important; stroke-dashoffset: 0 !important; }
+  .golden-path { animation: none !important; stroke-dashoffset: 0 !important; opacity: 0.6; }
   .onboarding-frame-img { animation: none !important; }
 }
 
@@ -625,15 +650,18 @@ a:focus-visible, button:focus-visible {
   pointer-events: none;
 }
 /* Pulso de luz dorada alrededor del marco — solo mientras se ve el
-   paso 1 del onboarding (primera impresión). drop-shadow (no
-   box-shadow) porque el marco es un PNG con silueta de arco, no un
-   rectángulo — así el brillo sigue el contorno real de la imagen. */
-.onboarding-inner:has(#onboarding-step-1.active) .onboarding-frame-img {
+   paso 1 del onboarding (primera impresión). La clase la pone/quita
+   JS en showOnboardingStep (app.js), no un selector :has() — algunos
+   navegadores no lo soportan y la regla se invalida por completo, sin
+   fallback visible. drop-shadow (no box-shadow) porque el marco es un
+   PNG con silueta de arco, no un rectángulo — así el brillo sigue el
+   contorno real de la imagen. */
+.onboarding-frame-img.frame-pulse {
   animation: frame-pulse 2.2s ease-in-out infinite;
 }
 @keyframes frame-pulse {
   0%, 100% { filter: drop-shadow(0 0 0 rgba(218,161,41,0)); }
-  50%      { filter: drop-shadow(0 0 16px rgba(218,161,41,0.9)); }
+  50%      { filter: drop-shadow(0 0 18px rgba(218,161,41,0.95)); }
 }
 .onboarding-title { margin: 0 0 6px; }
 .onboarding-title-script {
