@@ -189,32 +189,32 @@ h1, h2, h3 {
   flex-shrink: 0;
 }
 
-/* SPARKLES — twinkling golden light points along the village path.
-   Replaces the earlier butterfly effect: fixed gold color (no CSS
-   variable inside SVG, no emoji-rendering differences across phones)
-   and visually matches the existing golden light sweep. Positions are
-   generated from the actual path between stations (see buildGoldenPath
-   in app.js) instead of scattered randomly, so they never float over
-   open sky or rooftops. A small white core is layered under the gold
-   glow so they read clearly against both bright and dark art. */
+/* SPARKLES — twinkling star-shaped light points along the village path.
+   Rendered as a small 4-point star SVG (white core + gold glow via
+   drop-shadow, per IDENTIDAD_VISUAL_MIA_VILLAGE.md) instead of a plain
+   circle, so they read as "estrellitas brillantes" and not flat gold
+   blobs. Positions come from the actual path between stations (see
+   buildGoldenPath in app.js) instead of scattered randomly, so they
+   never float over open sky or rooftops. The opacity floor is raised
+   so they stay faintly visible instead of disappearing at each cycle. */
 .sparkle {
   position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 2px 1px rgba(255,255,255,0.9), 0 0 9px 3px rgba(218,161,41,0.85);
+  width: 14px;
+  height: 14px;
+  fill: #fff;
+  filter: drop-shadow(0 0 4px rgba(218,161,41,0.95));
   pointer-events: none;
+  transform: translate(-50%, -50%);
   animation: sparkle-twinkle ease-in-out infinite;
 }
 @keyframes sparkle-twinkle {
-  0%, 100% { opacity: 0; transform: scale(0.4); }
-  50%      { opacity: 1; transform: scale(1.3); }
+  0%, 100% { opacity: 0.35; transform: translate(-50%, -50%) scale(0.55); }
+  50%      { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
 }
 
-/* GOLDEN PATH OF LIGHT — thin glowing trail that flows along the same
-   station-to-station route as the sparkles, tying the map's stops
-   together into one visible journey. */
+/* GOLDEN PATH OF LIGHT — thin glowing trail connecting the 5 stations,
+   drawn once as the map loads (like the existing .map-sweep reveal)
+   rather than looping forever. */
 .golden-path-svg {
   position: absolute;
   inset: 0;
@@ -227,13 +227,14 @@ h1, h2, h3 {
   stroke: var(--gold);
   stroke-width: 3;
   stroke-linecap: round;
-  stroke-dasharray: 2 15;
   filter: drop-shadow(0 0 4px rgba(218,161,41,0.85));
-  opacity: 0.8;
-  animation: golden-path-flow 2.8s linear infinite;
+  opacity: 0.85;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: golden-path-draw 1.8s ease-out 0.5s 1 forwards;
 }
-@keyframes golden-path-flow {
-  to { stroke-dashoffset: -34; }
+@keyframes golden-path-draw {
+  to { stroke-dashoffset: 0; }
 }
 
 /* VILLAGE MODAL — "Ventana de la Aldea" */
@@ -448,13 +449,6 @@ body.modal-open { overflow: hidden; }
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .btn-primary { background: var(--burgundy); color: #fff; }
-
-/* Gentle pulse on the onboarding call-to-action buttons, inviting the tap */
-@keyframes btn-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(218,161,41,0.55); }
-  50%      { box-shadow: 0 0 0 11px rgba(218,161,41,0); }
-}
-.onboarding-step.active .btn-primary { animation: btn-pulse 2.2s ease-out infinite; }
 .btn-ghost-dark { background: transparent; color: var(--burgundy); border: 2px solid var(--burgundy); }
 
 /* Click feedback — applies to all interactive buttons across the site */
@@ -576,8 +570,8 @@ a:focus-visible, button:focus-visible {
   * { transition: none !important; }
   .sparkle, .map-sweep { display: none; }
   .map-img { animation: none !important; opacity: 1; transform: none; }
-  .golden-path { animation: none !important; stroke-dasharray: none; }
-  .onboarding-step.active .btn-primary { animation: none !important; }
+  .golden-path { animation: none !important; stroke-dashoffset: 0 !important; }
+  .onboarding-frame-img { animation: none !important; }
 }
 
 /* ============================================================
@@ -629,6 +623,17 @@ a:focus-visible, button:focus-visible {
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+/* Pulso de luz dorada alrededor del marco — solo mientras se ve el
+   paso 1 del onboarding (primera impresión). drop-shadow (no
+   box-shadow) porque el marco es un PNG con silueta de arco, no un
+   rectángulo — así el brillo sigue el contorno real de la imagen. */
+.onboarding-inner:has(#onboarding-step-1.active) .onboarding-frame-img {
+  animation: frame-pulse 2.2s ease-in-out infinite;
+}
+@keyframes frame-pulse {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(218,161,41,0)); }
+  50%      { filter: drop-shadow(0 0 16px rgba(218,161,41,0.9)); }
 }
 .onboarding-title { margin: 0 0 6px; }
 .onboarding-title-script {

@@ -84,6 +84,10 @@ if (miaAudio && miaAudioBtn) {
 // si las coordenadas de las estaciones cambian más adelante.
 const SVG_NS = "http://www.w3.org/2000/svg";
 
+// Estrella de 4 puntas (viewBox 0 0 24 24) para los destellos —
+// "estrellitas brillantes", no círculos.
+const SPARKLE_STAR_D = "M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z";
+
 function parsePercent(value) {
   return parseFloat(value) || 0;
 }
@@ -168,16 +172,25 @@ function buildGoldenPath(wrap) {
   const path = document.createElementNS(SVG_NS, "path");
   path.setAttribute("class", "golden-path");
   path.setAttribute("d", d);
+  // pathLength normaliza el largo del trazo a 100 unidades abstractas,
+  // sin importar cuántos px mida en mobile vs. desktop — así el
+  // stroke-dasharray:100 del CSS siempre dibuja el camino completo.
+  path.setAttribute("pathLength", "100");
   svg.appendChild(path);
   wrap.appendChild(svg);
 
   points.forEach(p => {
-    const s = document.createElement("span");
-    s.className = "sparkle";
+    const s = document.createElementNS(SVG_NS, "svg");
+    s.setAttribute("class", "sparkle");
+    s.setAttribute("viewBox", "0 0 24 24");
+    s.setAttribute("aria-hidden", "true");
     s.style.left = p.x.toFixed(1) + "%";
     s.style.top = p.y.toFixed(1) + "%";
     s.style.animationDelay = (Math.random() * 4).toFixed(2) + "s";
     s.style.animationDuration = (2 + Math.random() * 2).toFixed(2) + "s";
+    const star = document.createElementNS(SVG_NS, "path");
+    star.setAttribute("d", SPARKLE_STAR_D);
+    s.appendChild(star);
     wrap.appendChild(s);
   });
 }
