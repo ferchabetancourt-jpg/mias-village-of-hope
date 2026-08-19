@@ -74,21 +74,20 @@ if (miaAudio && miaAudioBtn) {
 }
 
 // Mariposas — solo en la pantalla del mapa (screen-home)
+// Usamos el emoji 🦋 en vez de SVG con color dinámico: el color por
+// variable CSS dentro de un SVG no siempre se ve bien en Safari de
+// iPhone. El emoji nativo se ve igual en todos los celulares.
 function createButterflies(containerSelector, count) {
   document.querySelectorAll(containerSelector).forEach(container => {
     for (let i = 0; i < count; i++) {
       const b = document.createElement("span");
       b.className = "butterfly";
-      b.style.left = (Math.random() * 84 + 4).toFixed(1) + "%";
-      b.style.top = (Math.random() * 78 + 4).toFixed(1) + "%";
+      b.textContent = "🦋";
+      b.style.fontSize = (16 + Math.random() * 10).toFixed(0) + "px";
+      b.style.left = (Math.random() * 82 + 4).toFixed(1) + "%";
+      b.style.top = (Math.random() * 74 + 4).toFixed(1) + "%";
       b.style.animationDelay = (Math.random() * 6).toFixed(2) + "s";
       b.style.animationDuration = (7 + Math.random() * 4).toFixed(2) + "s";
-      b.innerHTML = `
-        <svg viewBox="0 0 24 24" class="butterfly-svg" aria-hidden="true">
-          <g class="wing wing-left"><path d="M12 12 C6 3, -1 5, 1 12 C-1 19, 6 21, 12 12 Z" fill="var(--gold)"/></g>
-          <g class="wing wing-right"><path d="M12 12 C18 3, 25 5, 23 12 C25 19, 18 21, 12 12 Z" fill="var(--burgundy)"/></g>
-          <line x1="12" y1="5" x2="12" y2="19" stroke="var(--navy)" stroke-width="1"/>
-        </svg>`;
       container.appendChild(b);
     }
   });

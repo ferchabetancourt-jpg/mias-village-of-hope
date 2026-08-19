@@ -39,8 +39,10 @@
 
 <!-- HOME SCREEN — VILLAGE MAP -->
 <main id="screen-home" class="screen screen-home active">
+  <div class="map-stage">
   <div class="map-wrap map-wrap-mobile">
     <img src="images/village-map-mobile.png" alt="Illustrated map of Mía's Village with five stations along a path" class="map-img">
+    <span class="map-sweep" aria-hidden="true"></span>
 
     <button class="hotspot" style="top:11%; left:26%; width:26%; height:14%;" data-target="screen-meet-mia" aria-label="Meet Mía">
       <span class="sr-only">Meet Mía</span>
@@ -61,6 +63,7 @@
 
   <div class="map-wrap map-wrap-desktop">
     <img src="images/village-map-desktop.png" alt="Illustrated map of Mía's Village with five stations along a path" class="map-img">
+    <span class="map-sweep" aria-hidden="true"></span>
 
     <button class="hotspot" style="top:11%; left:7%; width:22%; height:40%;" data-target="screen-meet-mia" aria-label="Meet Mía">
       <span class="sr-only">Meet Mía</span>
@@ -77,6 +80,7 @@
     <button class="hotspot" style="top:67%; left:79%; width:10%; height:19%;" data-target="screen-contact" aria-label="Contact">
       <span class="sr-only">Contact</span>
     </button>
+  </div>
   </div>
 
   <p class="map-hint" data-en="Tap a place to explore" data-es="Toca un lugar para explorar">Tap a place to explore</p>
