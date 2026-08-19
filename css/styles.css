@@ -575,13 +575,14 @@ a:focus-visible, button:focus-visible {
 .onboarding-photo {
   position: absolute;
   /* Exact inner-window bounds of village-window-frame-clean.webp,
-     measured from the source PNG — not eyeballed. */
+     measured from the source PNG — not eyeballed. Explicit width/height
+     (not "auto" + 4-inset stretch) because that trick doesn't render
+     correctly on Safari/iPhone — it falls back to the image's full
+     intrinsic size instead of the inset box. */
   top: 16.34%;
   left: 10.25%;
-  right: 10.25%;
-  bottom: 10.61%;
-  width: auto;
-  height: auto;
+  width: 79.5%;
+  height: 73.05%;
   object-fit: cover;
   border-radius: 46% 46% 12% 12% / 30% 30% 8% 8%;
 }
