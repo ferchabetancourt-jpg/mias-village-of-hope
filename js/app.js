@@ -121,9 +121,11 @@ function jitteredPoint(a, b, t, sign) {
   return { x: mx + px * jitter * sign, y: my + py * jitter * sign };
 }
 
-// Dos puntos intermedios por tramo (en vez de uno) para que haya más
-// destellos a lo largo del camino — antes eran 9 en total (muy
-// disperso), ahora 13.
+// Tres puntos intermedios por tramo (en vez de dos) para que haya más
+// destellos a lo largo del camino — antes eran 9, luego 13, ahora 17.
+// Siguen anclados cerca del camino a propósito: si se reparten por
+// todo el mapa vuelven a caer sobre el cielo o los techos, donde no
+// se notan.
 function pathPoints(centers) {
   const points = [];
   centers.forEach((center, i) => {
@@ -131,8 +133,9 @@ function pathPoints(centers) {
     if (i < centers.length - 1) {
       const next = centers[i + 1];
       const sign = i % 2 === 0 ? 1 : -1;
-      points.push(jitteredPoint(center, next, 0.33, sign));
-      points.push(jitteredPoint(center, next, 0.66, -sign));
+      points.push(jitteredPoint(center, next, 0.25, sign));
+      points.push(jitteredPoint(center, next, 0.5, -sign));
+      points.push(jitteredPoint(center, next, 0.75, sign));
     }
   });
   return points;
@@ -238,7 +241,7 @@ function showTopScreen(id) {
   if (id === "screen-home") buildGoldenPaths();
 }
 
-const onboardingFrameImg = document.querySelector(".onboarding-frame-img");
+const onboardingFrame = document.querySelector(".onboarding-frame");
 
 function showOnboardingStep(id) {
   document.querySelectorAll(".onboarding-step").forEach(s => s.classList.remove("active"));
@@ -247,9 +250,11 @@ function showOnboardingStep(id) {
   // El pulso alrededor del marco solo corre en el paso 1 (primera
   // impresión). Se controla con una clase por JS en vez de un
   // selector :has() en CSS: :has() no lo soportan todos los
-  // navegadores, y ahí la regla entera se invalida sin aviso.
-  if (onboardingFrameImg) {
-    onboardingFrameImg.classList.toggle("frame-pulse", id === "onboarding-step-1");
+  // navegadores, y ahí la regla entera se invalida sin aviso. La clase
+  // va en el contenedor (.onboarding-frame), no en la imagen, porque
+  // el anillo que se expande es un ::before del contenedor.
+  if (onboardingFrame) {
+    onboardingFrame.classList.toggle("frame-pulse", id === "onboarding-step-1");
   }
 }
 

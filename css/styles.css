@@ -597,6 +597,7 @@ a:focus-visible, button:focus-visible {
   .map-img { animation: none !important; opacity: 1; transform: none; }
   .golden-path { animation: none !important; stroke-dashoffset: 0 !important; opacity: 0.6; }
   .onboarding-frame-img { animation: none !important; }
+  .onboarding-frame.frame-pulse::before { animation: none !important; content: none; }
 }
 
 /* ============================================================
@@ -640,6 +641,12 @@ a:focus-visible, button:focus-visible {
   width: 79.5%;
   height: 73.05%;
   object-fit: cover;
+  /* hero-photo.webp es más ancha que la ventana del marco, así que
+     "cover" siempre recorta los costados. Mía está corrida hacia la
+     derecha en la foto original — con la posición por defecto (50%)
+     su mano/muñeco quedaban cortados por el borde derecho del marco.
+     90% desplaza el recorte hacia esa zona para que quede completa. */
+  object-position: 90% center;
   border-radius: 46% 46% 12% 12% / 30% 30% 8% 8%;
 }
 .onboarding-frame-img {
@@ -653,13 +660,29 @@ a:focus-visible, button:focus-visible {
    paso 1 del onboarding (primera impresión). La clase la pone/quita
    JS en showOnboardingStep (app.js), no un selector :has() — algunos
    navegadores no lo soportan y la regla se invalida por completo, sin
-   fallback visible. drop-shadow (no box-shadow) porque el marco es un
-   PNG con silueta de arco, no un rectángulo — así el brillo sigue el
-   contorno real de la imagen. */
-.onboarding-frame-img.frame-pulse {
-  animation: frame-pulse 2.2s ease-in-out infinite;
+   fallback visible.
+   Dos capas: un anillo que se expande desde el borde del marco hacia
+   el fondo liso (mucho más notorio, porque ahí sí hay contraste real
+   contra el fondo, a diferencia del glow pegado al marco que se perdía
+   contra su propio dorado) + el drop-shadow original sobre la imagen,
+   que sigue el contorno real del arco (es un PNG, no un rectángulo). */
+.onboarding-frame.frame-pulse::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 46% 46% 12% 12% / 30% 30% 8% 8%;
+  pointer-events: none;
+  animation: frame-ring-pulse 2.2s ease-out infinite;
 }
-@keyframes frame-pulse {
+@keyframes frame-ring-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(218,161,41,0.6); }
+  70%  { box-shadow: 0 0 0 24px rgba(218,161,41,0); }
+  100% { box-shadow: 0 0 0 24px rgba(218,161,41,0); }
+}
+.onboarding-frame.frame-pulse .onboarding-frame-img {
+  animation: frame-glow-pulse 2.2s ease-in-out infinite;
+}
+@keyframes frame-glow-pulse {
   0%, 100% { filter: drop-shadow(0 0 0 rgba(218,161,41,0)); }
   50%      { filter: drop-shadow(0 0 18px rgba(218,161,41,0.95)); }
 }
