@@ -88,6 +88,32 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 // "estrellitas brillantes", no círculos.
 const SPARKLE_STAR_D = "M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z";
 
+// Coordenadas trazadas a mano sobre el camino de piedra real de cada
+// ilustración del mapa (medidas con una grilla sobre village-map-mobile.png
+// y village-map-desktop.png, no calculadas desde los hotspots). Se usan
+// SOLO para la línea/pulso del camino — los destellos siguen anclados a
+// los hotspots (hotspotCenters/pathPoints), sin cambios.
+// [x%, y%] en el sistema de coordenadas de cada imagen completa.
+// Trade-off: si se rediseña el mapa, hay que volver a trazar esto.
+const TRACED_PATH = {
+  mobile: [
+    [47.5,22.0],[48.0,24.2],[43.4,25.5],[34.7,26.6],[24.3,27.2],[16.2,27.5],
+    [8.7,28.6],[5.8,30.8],[7.5,33.5],[14.5,35.2],[23.1,35.7],[31.8,36.0],
+    [39.4,36.5],[45.1,37.9],[48.0,40.1],[46.3,42.0],[53.2,42.8],[60.2,43.4],
+    [55.6,46.7],[46.3,49.4],[38.2,51.6],[32.4,57.7],[25.5,63.2],[23.1,68.1],
+    [17.4,70.8],[11.6,74.1],[15.0,76.3],[32.4,74.1],[49.0,73.0],[60.2,70.8],
+    [67.1,69.2],[70.6,73.0],[72.3,78.0],[73.0,82.4],[73.0,84.6]
+  ],
+  desktop: [
+    [23.33,45.16],[22.43,48.88],[17.94,52.07],[14.35,54.73],[11.96,56.32],
+    [13.46,58.45],[17.94,59.51],[23.33,58.98],[28.41,57.39],[32.89,55.79],
+    [37.38,53.13],[40.37,51.01],[40.67,56.32],[44.86,57.92],[49.04,60.57],
+    [53.83,61.64],[56.82,58.98],[57.84,59.19],[61.79,60.89],[65.79,62.38],
+    [69.80,63.02],[72.79,63.76],[76.73,62.70],[80.74,61.32],[84.75,62.17],
+    [88.70,62.70],[87.92,69.07],[85.53,74.39],[84.03,76.41]
+  ]
+};
+
 function parsePercent(value) {
   return parseFloat(value) || 0;
 }
@@ -168,8 +194,16 @@ function buildGoldenPath(wrap) {
 
   const centers = hotspotCenters(wrap);
   if (centers.length < 2) return;
+  // Los destellos siguen anclados a los hotspots (sin cambios).
   const points = pathPoints(centers);
-  const pixelPoints = points.map(p => ({ x: (p.x / 100) * rect.width, y: (p.y / 100) * rect.height }));
+
+  // La línea/pulso, en cambio, sigue el camino real trazado a mano
+  // sobre la ilustración (TRACED_PATH) — no los puntos de arriba.
+  const tracedKey = wrap.classList.contains("map-wrap-desktop") ? "desktop" : "mobile";
+  const tracedPixelPoints = TRACED_PATH[tracedKey].map(([x, y]) => ({
+    x: (x / 100) * rect.width,
+    y: (y / 100) * rect.height
+  }));
 
   // SVG con viewBox igual al tamaño real del contenedor, para que el
   // grosor del trazo no se distorsione entre mobile y desktop.
@@ -178,7 +212,7 @@ function buildGoldenPath(wrap) {
   svg.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`);
   svg.setAttribute("aria-hidden", "true");
 
-  const d = smoothPathD(pixelPoints);
+  const d = smoothPathD(tracedPixelPoints);
   const path = document.createElementNS(SVG_NS, "path");
   path.setAttribute("class", "golden-path");
   path.setAttribute("d", d);
