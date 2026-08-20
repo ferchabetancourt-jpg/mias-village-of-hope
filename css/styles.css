@@ -1,5 +1,10 @@
 :root {
   --gold: #DAA129;
+  /* WCAG-AA-safe gold for small text (eyebrows) and focus outlines —
+     the true --gold at ~2.2:1 on cream fails AA for text. Decorative
+     gold (sparkles, borders, icons, buttons) stays --gold everywhere
+     else; this variant never replaces it. See IDENTIDAD_VISUAL_MIA_VILLAGE.md. */
+  --gold-text: #8E6A1C;
   --burgundy: #6F1921;
   --cream: #FDFAF1;
   --navy: #142132;
@@ -36,11 +41,14 @@ h1, h2, h3 {
   white-space: nowrap; border: 0;
 }
 
-/* FIXED BANNER */
+/* FIXED BANNER — z-index sits above .village-modal (300) so the banner,
+   incl. the hamburger menu, stays reachable while a station panel is open
+   (also fixes the language toggle being unreachable behind the modal
+   backdrop, which happened before this bump). */
 .app-banner {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 100;
+  z-index: 320;
   background: var(--cream);
   border-bottom: 1px solid rgba(20,33,50,0.08);
 }
@@ -96,6 +104,91 @@ h1, h2, h3 {
   cursor: pointer;
 }
 .lang-toggle:hover { background: var(--gold-soft); }
+
+.menu-toggle {
+  background: #fff;
+  border: 2px solid var(--gold);
+  color: var(--burgundy);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  font-size: 1.2rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.menu-toggle:hover { background: var(--gold-soft); }
+.menu-toggle:active { transform: scale(0.96); }
+@media (max-width: 380px) {
+  .menu-toggle { width: 34px; height: 34px; font-size: 1rem; }
+}
+
+/* STATION MENU — hamburger drawer with the 5 stations, opens from
+   anywhere in the app (z-index above .village-modal, per app-banner) */
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 350;
+  background: rgba(20,33,50,0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.menu-backdrop.active { opacity: 1; pointer-events: auto; }
+
+.station-menu {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 360;
+  width: min(300px, 82vw);
+  background: var(--cream);
+  box-shadow: 4px 0 24px rgba(20,33,50,0.25);
+  padding: 84px 20px 24px;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  overflow-y: auto;
+}
+.station-menu.active { transform: translateX(0); }
+
+.menu-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 2px solid var(--gold);
+  color: var(--burgundy);
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.station-menu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.station-menu-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 10px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--navy);
+  text-align: left;
+  cursor: pointer;
+}
+.station-menu-link:hover, .station-menu-link:focus-visible { background: rgba(218,161,41,0.14); }
+.station-menu-icon { width: 30px; height: 30px; flex-shrink: 0; }
 
 /* SCREENS */
 .screen {
@@ -179,8 +272,40 @@ h1, h2, h3 {
 }
 .hotspot:hover, .hotspot:focus-visible {
   background: rgba(218,161,41,0.18);
-  outline: 3px solid var(--gold);
+  outline: 3px solid var(--gold-text);
 }
+
+/* Floating station labels — always visible (not just on hover/focus),
+   anchored near the base of each hotspot the same way the golden path
+   anchors to it (see hotspotCenters in app.js: top + height*0.85).
+   Bounded width + wrapping instead of nowrap so a long label (e.g.
+   "This Week's Needs") can't get clipped by .map-stage's overflow:hidden
+   near a station close to the map edge. */
+.station-label {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translate(-50%, 85%);
+  max-width: 120px;
+  background: rgba(253,250,241,0.94);
+  border: 1.5px solid var(--gold);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 0.72rem;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--burgundy);
+  text-align: center;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(20,33,50,0.18);
+  pointer-events: none;
+}
+@media (max-width: 380px) {
+  .station-label { font-size: 0.62rem; padding: 2px 8px; max-width: 100px; }
+}
+
 .map-hint {
   font-family: var(--font-script);
   font-size: 1.3rem;
@@ -381,7 +506,7 @@ body.modal-open { overflow: hidden; }
 .eyebrow {
   font-family: var(--font-script);
   font-size: 1.4rem;
-  color: var(--gold);
+  color: var(--gold-text);
   margin: 0 0 4px;
 }
 
@@ -677,7 +802,7 @@ body.modal-open { overflow: hidden; }
 
 /* Focus states */
 a:focus-visible, button:focus-visible {
-  outline: 3px solid var(--gold);
+  outline: 3px solid var(--gold-text);
   outline-offset: 2px;
 }
 
@@ -896,4 +1021,47 @@ a:focus-visible, button:focus-visible {
 .station-polaroid.rot-b { transform: rotate(3.5deg); }
 @media (max-width: 380px) {
   .station-polaroid { width: 64px; }
+}
+
+/* ============================================================
+   NEXT BUTTON — sequential wayfinding between stations, distinct
+   from the primary CTAs (btn-primary/btn-ghost-dark). Order follows
+   the map path: Meet Mía → Village → Needs → Collaborators → Contact
+   → (loops back to) Meet Mía.
+   ============================================================ */
+.station-next {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px dashed rgba(111,25,33,0.2);
+  display: flex;
+  justify-content: center;
+}
+.next-station-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cream);
+  border: 2px solid var(--gold);
+  border-radius: 999px;
+  padding: 6px 6px 6px 20px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--burgundy);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.next-station-btn:hover { transform: translateX(3px); }
+.next-station-btn:active { transform: scale(0.96); }
+.next-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--burgundy);
+  color: #fff;
+  font-size: 1rem;
+  flex-shrink: 0;
 }

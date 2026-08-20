@@ -20,6 +20,7 @@ Confirmado: 19 agosto 2026
 | Cream | `#FDFAF1` | Fondo de tarjetas, base general |
 | Navy | `#142132` | Texto de lectura |
 | Gold soft | `#E9C878` | Variante clara de gold (hovers, detalles) |
+| Gold text | `#8E6A1C` | Variante oscura de gold, **solo para texto pequeño** (eyebrows) y outline de foco — el gold real (`#DAA129`) da ~2.2:1 de contraste sobre cream y no pasa WCAG AA para texto. Agregada en Bloque 4 (accesibilidad). El gold decorativo (destellos, bordes, íconos, botones) no cambia. |
 
 ---
 

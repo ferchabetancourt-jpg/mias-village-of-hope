@@ -60,12 +60,12 @@ Meta de entrega: lunes 24 agosto 2026
 
 **Nota:** este bloque se implementó en 3 commits (`Bloque 3: Meet Mía, Trust, Needs, Collaborators, Contact, onboarding`, `Bloque 3 round 2: ajustes de feedback`, `Meet Mía: botones también después del Resumen`) ya en `main`. El checklist quedó sin marcar por error — se corrige acá sin tocar código.
 
-### Bloque 4 — Navegación y accesibilidad
-- [ ] Labels flotantes sobre cada estación del mapa
-- [ ] Menú hamburguesa (☰) en el banner con las 5 estaciones
-- [ ] Botón "Next" (flecha con diseño) entre estaciones
-- [ ] Accesibilidad: alt text completo, orden de navegación, contraste de texto
-- [ ] Mejorar el emblema (muy complicado, no se ve bien en FB/WhatsApp)
+### Bloque 4 — Navegación y accesibilidad ✅ COMPLETADO (20 agosto 2026)
+- [x] Labels flotantes sobre cada estación del mapa (mobile y desktop)
+- [x] Menú hamburguesa (☰) en el banner con las 5 estaciones — siempre disponible, incluso con un panel de estación abierto
+- [x] Botón "Next" (flecha con diseño propio) entre estaciones, en orden del camino del mapa, con loop de Contact de vuelta a Meet Mía
+- [x] Accesibilidad: alt del mapa nombra las 5 estaciones; foco entra/sale del modal y del menú correctamente (trampa de Tab + restaura el foco al cerrar); `--gold-text` (oro oscurecido, ≥4.5:1) para el eyebrow y el outline de foco, sin tocar el gold decorativo
+- [ ] Mejorar el emblema (muy complicado, no se ve bien en FB/WhatsApp) — sigue en baja prioridad, sin tocar
 
 ---
 
