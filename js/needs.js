@@ -6,7 +6,7 @@
 // 3. Choose the response tab, format: Comma-separated values (.csv)
 // 4. Copy the published URL and paste it below as SHEET_CSV_URL
 
-const SHEET_CSV_URL = "PLACEHOLDER_PUBLISH_TO_WEB_CSV_URL";
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSYbKG2xq6Y8xt_Syk4joRGPVbAXc7yt3rMoctm7cLn821lCJ34P1xUUGhPQFOTpqchHpVPLSbfqSrZ/pub?gid=154502616&single=true&output=csv";
 
 async function loadNeeds() {
   const container = document.getElementById("needs-list");
