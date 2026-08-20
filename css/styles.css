@@ -283,40 +283,38 @@ h1, h2, h3 {
 /* Floating station labels — always visible (not just on hover/focus),
    anchored near the base of each hotspot the same way the golden path
    anchors to it (see hotspotCenters in app.js: top + height*0.85).
-   Background is a hand-drawn wooden signpost (images/station-sign.webp,
-   cropped from the full signpost+grass artwork down to just the board,
-   so it stays compact like the chip it replaces); the gold heart +
-   sparkles are painted into the right third of that image, so text is
-   confined to the left ~60% via padding to never sit on top of them.
-   Right-padding + bounded text width also means a long label (e.g.
-   "This Week's Needs") wraps to 2 lines instead of overflowing past the
-   sign or getting clipped by .map-stage's overflow:hidden near a
-   station close to the map edge. */
+   Small wood-plaque chip — CSS-only (repeating-linear-gradient grain,
+   flatter corners than a pill) instead of a photographic sign asset,
+   so it stays compact and never grows big enough to sit on top of the
+   station's own building. Bounded width + wrapping (not nowrap) so a
+   long label (e.g. "This Week's Needs") wraps to 2 lines instead of
+   overflowing past the plaque or getting clipped by .map-stage's
+   overflow:hidden near a station close to the map edge. */
 .station-label {
   position: absolute;
   bottom: 4%;
   left: 50%;
   transform: translate(-50%, 85%);
-  width: 132px;
-  aspect-ratio: 1214 / 350;
-  background-image: url('../images/station-sign.webp');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 7% 34% 9% 8%;
+  max-width: 118px;
+  background:
+    repeating-linear-gradient(180deg, rgba(139,94,52,0.07) 0px, rgba(139,94,52,0.07) 2px, transparent 2px, transparent 5px),
+    linear-gradient(160deg, #F5E7C6 0%, #ECD6A6 100%);
+  border: 2px solid var(--burgundy);
+  border-radius: 7px;
+  padding: 4px 10px;
   font-family: var(--font-head);
   font-weight: 800;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   line-height: 1.15;
   letter-spacing: 0.01em;
   color: var(--burgundy);
   text-align: center;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(20,33,50,0.18);
   pointer-events: none;
 }
 @media (max-width: 380px) {
-  .station-label { width: 118px; font-size: 0.58rem; }
+  .station-label { font-size: 0.62rem; padding: 3px 8px; max-width: 100px; }
 }
 
 .map-hint {
