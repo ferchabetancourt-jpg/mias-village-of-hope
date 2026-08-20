@@ -397,20 +397,7 @@ body.modal-open { overflow: hidden; }
   padding: 16px 18px;
   margin-top: 8px;
 }
-.meet-mia-summary h2 {
-  font-family: var(--font-script);
-  font-size: 1.2rem;
-  color: var(--burgundy);
-  margin: 0 0 4px;
-}
 .meet-mia-summary p { margin: 0; font-size: 0.95rem; }
-
-.meet-mia-story h2 {
-  font-family: var(--font-script);
-  font-size: 1.2rem;
-  color: var(--burgundy);
-  margin: 0 0 12px;
-}
 
 .meet-mia-cta { margin-top: 32px; text-align: center; }
 
