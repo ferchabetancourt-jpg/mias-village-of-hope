@@ -147,10 +147,14 @@ document.addEventListener("keydown", (e) => {
 let currentLang = "en";
 const langBtn = document.getElementById("lang-toggle");
 const translatable = document.querySelectorAll("[data-en]");
+const translatableAria = document.querySelectorAll("[data-aria-en]");
 
 function applyLang(lang) {
   translatable.forEach(el => {
     el.textContent = el.dataset[lang];
+  });
+  translatableAria.forEach(el => {
+    el.setAttribute("aria-label", lang === "en" ? el.dataset.ariaEn : el.dataset.ariaEs);
   });
   langBtn.textContent = lang === "en" ? "ES" : "EN";
   document.documentElement.lang = lang;

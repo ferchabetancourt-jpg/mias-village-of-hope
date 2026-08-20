@@ -1,4 +1,5 @@
 :root {
+  --green: #EAF3C9;
   --gold: #DAA129;
   /* WCAG-AA-safe gold for small text (eyebrows) and focus outlines —
      the true --gold at ~2.2:1 on cream fails AA for text. Decorative
@@ -201,7 +202,7 @@ h1, h2, h3 {
 /* HOME SCREEN — MAP */
 .screen-home {
   display: none;
-  background: linear-gradient(180deg, #EAF3C9 0%, var(--cream) 100%);
+  background: linear-gradient(180deg, var(--green) 0%, var(--cream) 100%);
   text-align: center;
   overflow: hidden;
 }
@@ -456,7 +457,7 @@ body.modal-open { overflow: hidden; }
 }
 
 .village-modal-card {
-  background: var(--cream);
+  background: var(--green);
   background-image: url('../images/background-texture-village.png');
   background-repeat: repeat;
   background-size: 420px;
@@ -475,7 +476,7 @@ body.modal-open { overflow: hidden; }
   padding: 34px 22px 36px;
   position: relative;
   z-index: 1;
-  background: rgba(253,250,241,0.92);
+  background: rgba(234,243,201,0.92);
 }
 
 .modal-corner {
@@ -525,7 +526,18 @@ body.modal-open { overflow: hidden; }
   padding: 8px 4px 24px;
 }
 
-.back-btn {
+/* PANEL TOPBAR — back button (left) and next-station button (right),
+   same pill style/size so the pair reads as one matched control, not
+   two different weights of button. */
+.panel-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.back-btn,
+.next-station-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -538,9 +550,9 @@ body.modal-open { overflow: hidden; }
   font-size: 0.85rem;
   color: var(--burgundy);
   cursor: pointer;
-  margin-bottom: 20px;
 }
-.back-btn:hover { background: var(--gold-soft); }
+.back-btn:hover,
+.next-station-btn:hover { background: var(--gold-soft); }
 
 .eyebrow {
   font-family: var(--font-script);
@@ -564,6 +576,8 @@ body.modal-open { overflow: hidden; }
 .meet-mia-summary p { margin: 0; font-size: 0.95rem; }
 
 .meet-mia-cta { margin-top: 32px; text-align: center; }
+
+.collab-join-cta { margin: 18px 0 24px; text-align: center; }
 
 .photo-row { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; justify-content: center; }
 .photo-row img {
@@ -649,6 +663,7 @@ body.modal-open { overflow: hidden; }
 /* Click feedback — applies to all interactive buttons across the site */
 .btn:active,
 .back-btn:active,
+.next-station-btn:active,
 .lang-toggle:active,
 .modal-close:active {
   transform: scale(0.96);
@@ -667,6 +682,13 @@ body.modal-open { overflow: hidden; }
   margin: 20px 0 0;
 }
 .needs-list { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+.needs-section-title {
+  font-family: var(--font-script);
+  font-size: 1.15rem;
+  color: var(--gold-text);
+  margin: 10px 0 -2px;
+}
+.needs-section-title:first-child { margin-top: 0; }
 .need-item {
   background: #fff;
   border-left: 4px solid var(--gold);
@@ -859,7 +881,7 @@ a:focus-visible, button:focus-visible {
    (or every visit unless the user checks "don't show this again")
    ============================================================ */
 .screen-onboarding {
-  background: linear-gradient(180deg, #EAF3C9 0%, var(--cream) 100%);
+  background: linear-gradient(180deg, var(--green) 0%, var(--cream) 100%);
 }
 .screen.screen-onboarding.active {
   display: flex;
@@ -1041,12 +1063,12 @@ a:focus-visible, button:focus-visible {
    ============================================================ */
 .station-header {
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
+  align-items: center;
+  gap: 16px;
   margin-bottom: 2px;
 }
 .station-polaroid {
-  width: 82px;
+  width: 108px;
   height: auto;
   aspect-ratio: 4/5;
   object-fit: cover;
@@ -1059,48 +1081,9 @@ a:focus-visible, button:focus-visible {
 .station-polaroid.rot-a { transform: rotate(-4deg); }
 .station-polaroid.rot-b { transform: rotate(3.5deg); }
 @media (max-width: 380px) {
-  .station-polaroid { width: 64px; }
+  .station-polaroid { width: 84px; }
 }
 
-/* ============================================================
-   NEXT BUTTON — sequential wayfinding between stations, distinct
-   from the primary CTAs (btn-primary/btn-ghost-dark). Order follows
-   the map path: Meet Mía → Village → Needs → Collaborators → Contact
-   → (loops back to) Meet Mía.
-   ============================================================ */
-.station-next {
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px dashed rgba(111,25,33,0.2);
-  display: flex;
-  justify-content: center;
-}
-.next-station-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--cream);
-  border: 2px solid var(--gold);
-  border-radius: 999px;
-  padding: 6px 6px 6px 20px;
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 0.85rem;
-  color: var(--burgundy);
-  cursor: pointer;
-  transition: transform 0.15s ease;
-}
-.next-station-btn:hover { transform: translateX(3px); }
-.next-station-btn:active { transform: scale(0.96); }
-.next-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--burgundy);
-  color: #fff;
-  font-size: 1rem;
-  flex-shrink: 0;
-}
+/* NEXT BUTTON lives in .panel-topbar now (see rule near .back-btn),
+   sharing that pill style. Order follows the map path:
+   Meet Mía → Village → Needs → Collaborators → Contact → (loops to) Meet Mía. */
