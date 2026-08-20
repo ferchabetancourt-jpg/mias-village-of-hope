@@ -271,8 +271,7 @@ h1, h2, h3 {
   border-radius: 50%;
   /* .sparkle/.golden-pulse are appended to .map-wrap after the hotspots
      (see buildGoldenPath in app.js), so without this they'd paint on
-     top of the hotspot and its now-larger signpost label, sometimes
-     landing right over the text. */
+     top of the hotspot itself. */
   z-index: 2;
 }
 .hotspot:hover, .hotspot:focus-visible {
@@ -280,53 +279,42 @@ h1, h2, h3 {
   outline: 3px solid var(--gold-text);
 }
 
-/* Floating station labels — always visible (not just on hover/focus),
-   anchored near the base of each hotspot the same way the golden path
-   anchors to it (see hotspotCenters in app.js: top + height*0.85).
-   Small wood-plaque chip — CSS-only (repeating-linear-gradient grain,
-   flatter corners than a pill) instead of a photographic sign asset,
-   so it stays compact and never grows big enough to sit on top of the
-   station's own building. Bounded width + wrapping (not nowrap) so a
-   long label (e.g. "This Week's Needs") wraps to 2 lines instead of
-   overflowing past the plaque or getting clipped by .map-stage's
-   overflow:hidden near a station close to the map edge. */
+/* Floating station labels — always visible (not just on hover/focus).
+   Plain text, no chip/background: each one is a direct child of
+   .map-wrap (a sibling of the hotspots, not nested inside one) with its
+   own hand-picked top/left set inline in the HTML — chosen by looking
+   at the actual artwork so it lands on open grass/path next to its
+   station instead of the hotspot's own (deliberately oversized, tap-
+   friendly) bounding box, which covers the whole building and can't
+   give a reliable anchor for 5 very differently-shaped stations at
+   once. Legibility against the busy illustration comes from a real
+   stroke on the glyph (-webkit-text-stroke), not text-shadow — every
+   text-shadow variant tried (blurred, crisp 4-direction, thick,
+   however) softened the tilde on "Mía" into invisibility.
+   Font-size/weight are NOT arbitrary: below ~0.85rem, or at weight 800,
+   the tilde stops rendering reliably at all in this engine regardless
+   of outline technique — confirmed by testing 0.72/0.8/0.9/1rem at
+   700/800 side by side. 0.9rem + 700 is the smallest combination where
+   it's consistently visible. */
 .station-label {
   position: absolute;
-  bottom: 4%;
-  left: 50%;
-  transform: translate(-50%, 85%);
-  max-width: 118px;
-  background:
-    repeating-linear-gradient(180deg, rgba(139,94,52,0.07) 0px, rgba(139,94,52,0.07) 2px, transparent 2px, transparent 5px),
-    linear-gradient(160deg, #F5E7C6 0%, #ECD6A6 100%);
-  border: 2px solid var(--burgundy);
-  border-radius: 7px;
-  padding: 4px 10px;
+  transform: translate(-50%, -50%);
+  max-width: 108px;
   font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 0.72rem;
+  font-weight: 700;
+  font-size: 0.9rem;
   line-height: 1.15;
   letter-spacing: 0.01em;
   color: var(--burgundy);
+  -webkit-text-stroke: 0.6px var(--cream);
+  paint-order: stroke fill;
   text-align: center;
   white-space: normal;
-  box-shadow: 0 2px 6px rgba(20,33,50,0.18);
   pointer-events: none;
+  z-index: 3;
 }
 @media (max-width: 380px) {
-  .station-label { font-size: 0.62rem; padding: 3px 8px; max-width: 100px; }
-}
-
-/* The Village and This Week's Needs sit low/wide in the illustration
-   (the church steps, the market stall counter) — the default centered
-   anchor put the chip right on top of them. Nudged down-right by a
-   fixed pixel offset (added on top of the normal -50%/85% centering,
-   not a % of the hotspot box) so the shift is the same on mobile and
-   desktop even though those two hotspots have very different box
-   sizes between breakpoints. */
-.hotspot[data-target="screen-village"] .station-label,
-.hotspot[data-target="screen-needs"] .station-label {
-  transform: translate(calc(-50% + 16px), calc(85% + 22px));
+  .station-label { font-size: 0.8rem; max-width: 96px; }
 }
 
 .map-hint {
