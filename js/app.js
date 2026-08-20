@@ -66,23 +66,26 @@ langBtn.addEventListener("click", () => {
   applyLang(currentLang);
 });
 
-// Audio de Mía — play/pause, sin autoplay
+// Audio de Mía — play/pause, sin autoplay. Hay dos botones (arriba y
+// abajo de la historia) controlando el mismo <audio>, por eso se usa
+// una clase en vez de un id y se sincronizan los íconos de ambos.
 const miaAudio = document.getElementById("mia-audio");
-const miaAudioBtn = document.getElementById("mia-audio-btn");
-if (miaAudio && miaAudioBtn) {
-  const icon = miaAudioBtn.querySelector(".mia-audio-icon");
-  miaAudioBtn.addEventListener("click", () => {
-    if (miaAudio.paused) {
-      miaAudio.play();
-      icon.textContent = "⏸️";
-    } else {
-      miaAudio.pause();
-      icon.textContent = "🔊";
-    }
+const miaAudioBtns = document.querySelectorAll(".mia-audio-btn");
+if (miaAudio && miaAudioBtns.length) {
+  const icons = [...miaAudioBtns].map(btn => btn.querySelector(".mia-audio-icon"));
+  const setIcon = text => icons.forEach(icon => { icon.textContent = text; });
+  miaAudioBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (miaAudio.paused) {
+        miaAudio.play();
+        setIcon("⏸️");
+      } else {
+        miaAudio.pause();
+        setIcon("🔊");
+      }
+    });
   });
-  miaAudio.addEventListener("ended", () => {
-    icon.textContent = "🔊";
-  });
+  miaAudio.addEventListener("ended", () => setIcon("🔊"));
 }
 
 // Camino de luz dorada + destellos — solo en la pantalla del mapa
