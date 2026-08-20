@@ -4,7 +4,31 @@ const panels = document.querySelectorAll(".modal-panel");
 const hotspots = document.querySelectorAll(".hotspot");
 const closers = document.querySelectorAll("[data-close]");
 
+// Keeps Tab cycling inside an open overlay (modal or menu drawer)
+// instead of leaking focus out to whatever sits behind it.
+// Filtered by offsetParent (excludes display:none) because .village-modal
+// holds all 5 station panels at once — only one is .active at a time,
+// so querySelectorAll alone would also match buttons in the hidden ones.
+function trapFocus(e, container) {
+  const focusable = [...container.querySelectorAll(
+    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )].filter(el => el.offsetParent !== null);
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+
+let modalLastFocus = null;
+
 function openModal(id) {
+  modalLastFocus = document.activeElement;
   panels.forEach(p => p.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   modal.classList.add("active");
@@ -16,12 +40,17 @@ function openModal(id) {
   // si no, el reel puede quedar en blanco porque el panel estaba
   // oculto (display:none) cuando el script de Instagram cargó.
   if (window.instgrm) window.instgrm.Embeds.process();
+  // Foco entra al modal (botón cerrar) en vez de quedarse en el hotspot
+  // que ya no es visible detrás del overlay.
+  const closeBtn = modal.querySelector(".modal-close");
+  if (closeBtn) closeBtn.focus();
 }
 
 function closeModal() {
   modal.classList.remove("active");
   modal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-open");
+  if (modalLastFocus) modalLastFocus.focus();
 }
 
 hotspots.forEach(btn => {
@@ -33,7 +62,7 @@ closers.forEach(btn => {
 });
 
 // Navegación entre paneles sin cerrar el modal (ej. botón "Ways to help"
-// dentro de Meet Mía, que lleva directo a This Week's Needs).
+// dentro de Meet Mía, y los botones "Next" al fondo de cada estación).
 document.querySelectorAll(".panel-nav").forEach(btn => {
   btn.addEventListener("click", () => {
     panels.forEach(p => p.classList.remove("active"));
@@ -41,11 +70,77 @@ document.querySelectorAll(".panel-nav").forEach(btn => {
     if (target) target.classList.add("active");
     const scrollArea = modal.querySelector(".village-modal-scroll");
     if (scrollArea) scrollArea.scrollTop = 0;
+    // Mueve el foco al inicio del panel nuevo (botón "Back"), igual que
+    // openModal — si no, el foco queda en un botón "Next" que ya no
+    // está visible dentro del panel anterior.
+    const backBtn = target && target.querySelector(".back-btn");
+    if (backBtn) backBtn.focus();
   });
 });
 
+// STATION MENU — hamburger drawer with the 5 stations. Stays reachable
+// even while a station panel is open (app-banner sits above .village-modal
+// in z-index for exactly this reason), so it always opens fresh via
+// openModal() rather than assuming a panel is already showing.
+const menuToggle = document.getElementById("menu-toggle");
+const stationMenu = document.getElementById("station-menu");
+const menuBackdrop = document.getElementById("menu-backdrop");
+const menuClosers = document.querySelectorAll("[data-menu-close]");
+const menuLinks = document.querySelectorAll(".station-menu-link");
+let menuLastFocus = null;
+
+function openMenu() {
+  menuLastFocus = document.activeElement;
+  stationMenu.classList.add("active");
+  stationMenu.setAttribute("aria-hidden", "false");
+  // El drawer se oculta con transform (no display:none) para poder
+  // animarlo, así que aria-hidden solo no basta — sin inert, sus
+  // botones seguían alcanzables con Tab incluso fuera de pantalla.
+  stationMenu.inert = false;
+  menuBackdrop.classList.add("active");
+  menuToggle.setAttribute("aria-expanded", "true");
+  const first = stationMenu.querySelector(".station-menu-link");
+  if (first) first.focus();
+}
+
+function closeMenu() {
+  stationMenu.classList.remove("active");
+  stationMenu.setAttribute("aria-hidden", "true");
+  stationMenu.inert = true;
+  menuBackdrop.classList.remove("active");
+  menuToggle.setAttribute("aria-expanded", "false");
+  if (menuLastFocus) menuLastFocus.focus();
+}
+
+if (menuToggle) {
+  menuToggle.addEventListener("click", () => {
+    if (stationMenu.classList.contains("active")) closeMenu();
+    else openMenu();
+  });
+}
+
+menuClosers.forEach(btn => {
+  btn.addEventListener("click", closeMenu);
+});
+
+menuLinks.forEach(btn => {
+  btn.addEventListener("click", () => {
+    closeMenu();
+    openModal(btn.dataset.target);
+  });
+});
+
+// Escape closes whichever overlay is on top (menu first, since it can
+// open over an already-open modal); Tab stays trapped inside it.
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modal.classList.contains("active")) closeModal();
+  if (e.key === "Escape") {
+    if (stationMenu.classList.contains("active")) { closeMenu(); return; }
+    if (modal.classList.contains("active")) { closeModal(); return; }
+  }
+  if (e.key === "Tab") {
+    if (stationMenu.classList.contains("active")) trapFocus(e, stationMenu);
+    else if (modal.classList.contains("active")) trapFocus(e, modal);
+  }
 });
 
 // Language toggle (EN default, ES on tap)

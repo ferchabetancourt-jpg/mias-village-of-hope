@@ -23,6 +23,9 @@
 <!-- FIXED BANNER -->
 <header class="app-banner">
   <div class="banner-inner">
+    <button id="menu-toggle" type="button" class="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="station-menu" aria-label="Open village menu">
+      <span aria-hidden="true">☰</span>
+    </button>
     <div class="banner-brand">
       <img src="images/banner-icon.png" alt="" class="banner-icon">
       <div class="banner-text">
@@ -36,6 +39,37 @@
     <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">ES</button>
   </div>
 </header>
+
+<!-- STATION MENU — hamburger drawer, reachable from anywhere (even with
+     a station panel open) so it always sits above .village-modal -->
+<div id="menu-backdrop" class="menu-backdrop" data-menu-close></div>
+<nav id="station-menu" class="station-menu" aria-hidden="true" aria-label="Village stations" inert>
+  <button type="button" class="menu-close" data-menu-close aria-label="Close menu">
+    <span aria-hidden="true">✕</span>
+  </button>
+  <ul class="station-menu-list">
+    <li><button type="button" class="station-menu-link" data-target="screen-meet-mia">
+      <img src="images/icon-meetmia.webp" alt="" class="station-menu-icon">
+      <span data-en="Meet Mía" data-es="Conoce a Mía">Meet Mía</span>
+    </button></li>
+    <li><button type="button" class="station-menu-link" data-target="screen-village">
+      <img src="images/icon-village.webp" alt="" class="station-menu-icon">
+      <span data-en="The Village" data-es="La Aldea">The Village</span>
+    </button></li>
+    <li><button type="button" class="station-menu-link" data-target="screen-needs">
+      <img src="images/icon-needs.webp" alt="" class="station-menu-icon">
+      <span data-en="This Week's Needs" data-es="Necesidades de esta Semana">This Week's Needs</span>
+    </button></li>
+    <li><button type="button" class="station-menu-link" data-target="screen-collaborators">
+      <img src="images/icon-collaborators.webp" alt="" class="station-menu-icon">
+      <span data-en="Collaborators" data-es="Colaboradores">Collaborators</span>
+    </button></li>
+    <li><button type="button" class="station-menu-link" data-target="screen-contact">
+      <img src="images/icon-contact.webp" alt="" class="station-menu-icon">
+      <span data-en="Contact" data-es="Contacto">Contact</span>
+    </button></li>
+  </ul>
+</nav>
 
 <!-- ONBOARDING — one fixed screen (window + photo never move); 3 steps
      of content swap underneath it -->
@@ -88,7 +122,7 @@
 <main id="screen-home" class="screen screen-home">
   <div class="map-stage">
   <div class="map-wrap map-wrap-mobile">
-    <img src="images/village-map-mobile.png" alt="Illustrated map of Mía's Village with five stations along a path" class="map-img">
+    <img src="images/village-map-mobile.png" alt="Illustrated map of Mía's Village with five stations along a path: Meet Mía, The Village, This Week's Needs, Collaborators, and Contact" class="map-img">
     <span class="map-sweep" aria-hidden="true"></span>
 
     <button class="hotspot" style="top:11%; left:26%; width:26%; height:14%;" data-target="screen-meet-mia" aria-label="Meet Mía">
@@ -106,10 +140,20 @@
     <button class="hotspot" style="top:82%; left:60%; width:26%; height:13%;" data-target="screen-contact" aria-label="Contact">
       <span class="sr-only">Contact</span>
     </button>
+
+    <!-- Labels positioned independently of the hotspot boxes above (which
+         are deliberately oversized tap targets covering the whole
+         building) — each one hand-placed on open grass/path next to its
+         station so it never sits on top of the illustration. -->
+    <span class="station-label" aria-hidden="true" style="top:27%; left:14%;" data-en="Meet Mía" data-es="Conoce a Mía">Meet Mía</span>
+    <span class="station-label" aria-hidden="true" style="top:40%; left:36%;" data-en="The Village" data-es="La Aldea">The Village</span>
+    <span class="station-label" aria-hidden="true" style="top:53%; left:78%;" data-en="This Week's Needs" data-es="Necesidades de esta Semana">This Week's Needs</span>
+    <span class="station-label" aria-hidden="true" style="top:66%; left:20%;" data-en="Collaborators" data-es="Colaboradores">Collaborators</span>
+    <span class="station-label" aria-hidden="true" style="top:87%; left:31%;" data-en="Contact" data-es="Contacto">Contact</span>
   </div>
 
   <div class="map-wrap map-wrap-desktop">
-    <img src="images/village-map-desktop.png" alt="Illustrated map of Mía's Village with five stations along a path" class="map-img">
+    <img src="images/village-map-desktop.png" alt="Illustrated map of Mía's Village with five stations along a path: Meet Mía, The Village, This Week's Needs, Collaborators, and Contact" class="map-img">
     <span class="map-sweep" aria-hidden="true"></span>
 
     <button class="hotspot" style="top:11%; left:7%; width:22%; height:40%;" data-target="screen-meet-mia" aria-label="Meet Mía">
@@ -127,6 +171,12 @@
     <button class="hotspot" style="top:67%; left:79%; width:10%; height:19%;" data-target="screen-contact" aria-label="Contact">
       <span class="sr-only">Contact</span>
     </button>
+
+    <span class="station-label" aria-hidden="true" style="top:52%; left:18%;" data-en="Meet Mía" data-es="Conoce a Mía">Meet Mía</span>
+    <span class="station-label" aria-hidden="true" style="top:61%; left:31%;" data-en="The Village" data-es="La Aldea">The Village</span>
+    <span class="station-label" aria-hidden="true" style="top:63%; left:52%;" data-en="This Week's Needs" data-es="Necesidades de esta Semana">This Week's Needs</span>
+    <span class="station-label" aria-hidden="true" style="top:58%; left:71%;" data-en="Collaborators" data-es="Colaboradores">Collaborators</span>
+    <span class="station-label" aria-hidden="true" style="top:83%; left:74%;" data-en="Contact" data-es="Contacto">Contact</span>
   </div>
   </div>
 
@@ -221,6 +271,13 @@
         <button class="btn btn-primary panel-nav" data-target="screen-needs" data-en="Ways to help" data-es="Formas de ayudar">Ways to help</button>
       </div>
     </div>
+
+    <div class="station-next">
+      <button class="next-station-btn panel-nav" data-target="screen-village">
+        <span data-en="Next: The Village" data-es="Siguiente: La Aldea">Next: The Village</span>
+        <span class="next-arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -288,6 +345,13 @@
       <a href="PLACEHOLDER_FACEBOOK_URL" class="btn btn-primary" target="_blank" rel="noopener" data-en="Follow on Facebook" data-es="Síguenos en Facebook">Follow on Facebook</a>
       <a href="PLACEHOLDER_WHATSAPP_URL" class="btn btn-ghost-dark" target="_blank" rel="noopener" data-en="Join WhatsApp Community" data-es="Únete a la Comunidad de WhatsApp">Join WhatsApp Community</a>
     </div>
+
+    <div class="station-next">
+      <button class="next-station-btn panel-nav" data-target="screen-needs">
+        <span data-en="Next: This Week's Needs" data-es="Siguiente: Necesidades de esta Semana">Next: This Week's Needs</span>
+        <span class="next-arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -308,6 +372,13 @@
     <p data-en="Updated by Sonia — check back often." data-es="Actualizado por Sonia — revisa seguido.">Updated by Sonia — check back often.</p>
     <div id="needs-list" class="needs-list">
       <p class="needs-empty" data-en="Loading this week's needs…" data-es="Cargando las necesidades de esta semana…">Loading this week's needs…</p>
+    </div>
+
+    <div class="station-next">
+      <button class="next-station-btn panel-nav" data-target="screen-collaborators">
+        <span data-en="Next: Collaborators" data-es="Siguiente: Colaboradores">Next: Collaborators</span>
+        <span class="next-arrow" aria-hidden="true">→</span>
+      </button>
     </div>
   </div>
 </section>
@@ -381,6 +452,13 @@
       <!-- PLACEHOLDER: texto pendiente de aprobación final de Sonia -->
       <p>[Pending: final approved text about Celpa Clinic]</p>
     </div>
+
+    <div class="station-next">
+      <button class="next-station-btn panel-nav" data-target="screen-contact">
+        <span data-en="Next: Contact" data-es="Siguiente: Contacto">Next: Contact</span>
+        <span class="next-arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -453,6 +531,13 @@
     </div>
 
     <p class="footer-tagline" data-en="It Takes a Village. This Is Mía's. 💛" data-es="Se necesita una aldea. Esta es la de Mía. 💛">It Takes a Village. This Is Mía's. 💛</p>
+
+    <div class="station-next">
+      <button class="next-station-btn panel-nav" data-target="screen-meet-mia">
+        <span data-en="Next: Meet Mía" data-es="Siguiente: Conoce a Mía">Next: Meet Mía</span>
+        <span class="next-arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
   </div>
 </section>
 

@@ -1,6 +1,6 @@
 # PENDIENTES_MIA_VILLAGE.md
 Ruta de pendientes — Proyecto "Mía's Village of Hope"
-Última actualización: 19 agosto 2026
+Última actualización: 20 agosto 2026
 Meta de entrega: lunes 24 agosto 2026
 
 ---
@@ -46,24 +46,26 @@ Meta de entrega: lunes 24 agosto 2026
 
 **Nota de aprobación:** el trazo del camino se digitalizó a mano sobre el sendero de piedra real de la ilustración (mobile y desktop) para que el pulso lo siga con fidelidad. No quedó exacto al 100%, pero mejoró notablemente frente a la curva calculada original — aprobado por Fercha así, sin necesidad de mayor ajuste.
 
-### Bloque 3 — Estructura y contenido de estaciones
-- [ ] Meet Mía: quitar foto fija (sticky), volver a scroll normal
-- [ ] Meet Mía: dos secciones — "Resumen" (formato "Mía loves: __, __, __") y "Escrito de Sonia" (historia larga)
-- [ ] Meet Mía: botón final a This Week's Needs ("Ways to help" / "How to help")
-- [ ] Sección Trust nueva (quién administra → cómo llega la ayuda → familia → gastos)
-- [ ] This Week's Needs: botón/etiqueta "I can help" por necesidad *(a planear juntas)*
-- [ ] This Week's Needs: marcar visualmente las "most urgent"
-- [ ] This Week's Needs: mostrar también necesidades cumplidas + valor recogido
-- [ ] Collaborators: resumen corto → lleva al detalle de cada colaborador
-- [ ] Contact: separar visualmente íconos de redes sociales vs. botones de donación
-- [ ] Onboarding pantalla 1: texto bajo la foto (sin sonar a lástima) + tono más serio/confiable
+### Bloque 3 — Estructura y contenido de estaciones ✅ COMPLETADO (19 agosto 2026)
+- [x] Meet Mía: quitar foto fija (sticky), volver a scroll normal
+- [x] Meet Mía: dos secciones — "Resumen" (formato "Mía loves: __, __, __") y "Escrito de Sonia" (historia larga)
+- [x] Meet Mía: botón final a This Week's Needs ("Ways to help" / "How to help") — también agregado justo después del Resumen
+- [x] Sección Trust nueva (quién administra → cómo llega la ayuda → familia → gastos)
+- [x] This Week's Needs: botón/etiqueta "I can help" por necesidad
+- [x] This Week's Needs: marcar visualmente las "most urgent" *(vía estado "🟡 Still needed" vs. "✅ Covered")*
+- [x] This Week's Needs: mostrar también necesidades cumplidas + valor recogido
+- [x] Collaborators: resumen corto → lleva al detalle de cada colaborador
+- [x] Contact: separar visualmente íconos de redes sociales vs. botones de donación
+- [x] Onboarding pantalla 1: texto bajo la foto (sin sonar a lástima) + tono más serio/confiable
 
-### Bloque 4 — Navegación y accesibilidad
-- [ ] Labels flotantes sobre cada estación del mapa
-- [ ] Menú hamburguesa (☰) en el banner con las 5 estaciones
-- [ ] Botón "Next" (flecha con diseño) entre estaciones
-- [ ] Accesibilidad: alt text completo, orden de navegación, contraste de texto
-- [ ] Mejorar el emblema (muy complicado, no se ve bien en FB/WhatsApp)
+**Nota:** este bloque se implementó en 3 commits (`Bloque 3: Meet Mía, Trust, Needs, Collaborators, Contact, onboarding`, `Bloque 3 round 2: ajustes de feedback`, `Meet Mía: botones también después del Resumen`) ya en `main`. El checklist quedó sin marcar por error — se corrige acá sin tocar código.
+
+### Bloque 4 — Navegación y accesibilidad ✅ COMPLETADO (20 agosto 2026)
+- [x] Labels flotantes sobre cada estación del mapa (mobile y desktop)
+- [x] Menú hamburguesa (☰) en el banner con las 5 estaciones — siempre disponible, incluso con un panel de estación abierto
+- [x] Botón "Next" (flecha con diseño propio) entre estaciones, en orden del camino del mapa, con loop de Contact de vuelta a Meet Mía
+- [x] Accesibilidad: alt del mapa nombra las 5 estaciones; foco entra/sale del modal y del menú correctamente (trampa de Tab + restaura el foco al cerrar); `--gold-text` (oro oscurecido, ≥4.5:1) para el eyebrow y el outline de foco, sin tocar el gold decorativo
+- [ ] Mejorar el emblema (muy complicado, no se ve bien en FB/WhatsApp) — sigue en baja prioridad, sin tocar
 
 ---
 
