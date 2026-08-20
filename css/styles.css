@@ -313,6 +313,34 @@ h1, h2, h3 {
   pointer-events: none;
   z-index: 3;
 }
+/* Hand-painted watercolor-blob backing, not a chip: two overlapping
+   irregular shapes (not one clean oval — a single asymmetric
+   border-radius still reads as a smoothed pill) at different rotations,
+   no border, soft shadow instead of a hard edge. ~35% smaller footprint
+   than the old rectangular chip (tight inset instead of the 10px/4px
+   padding that chip had). Sit behind the text via negative z-index
+   within the label's own stacking context. */
+.station-label::before {
+  content: "";
+  position: absolute;
+  inset: -7px -10px;
+  z-index: -2;
+  background: var(--cream);
+  opacity: 0.9;
+  border-radius: 58% 42% 52% 48% / 42% 55% 45% 58%;
+  box-shadow: 0 2px 5px rgba(20,33,50,0.16);
+  transform: rotate(-2.5deg);
+}
+.station-label::after {
+  content: "";
+  position: absolute;
+  inset: -6px -8px;
+  z-index: -1;
+  background: var(--cream);
+  opacity: 0.85;
+  border-radius: 44% 56% 58% 42% / 56% 40% 60% 44%;
+  transform: rotate(3deg);
+}
 @media (max-width: 380px) {
   .station-label { font-size: 0.8rem; max-width: 96px; }
 }
