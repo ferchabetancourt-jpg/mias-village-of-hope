@@ -158,6 +158,11 @@ function applyLang(lang) {
   });
   langBtn.textContent = lang === "en" ? "ES" : "EN";
   document.documentElement.lang = lang;
+  // Lets scripts outside this static sweep (needs.js renders its content
+  // dynamically, after this NodeList snapshot was taken) know the language
+  // changed so they can re-render themselves in the new language.
+  window.miaLang = lang;
+  document.dispatchEvent(new CustomEvent("mia-lang-change", { detail: { lang } }));
 }
 
 langBtn.addEventListener("click", () => {
