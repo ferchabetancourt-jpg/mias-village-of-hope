@@ -189,23 +189,77 @@ h1, h2, h3 {
   flex-shrink: 0;
 }
 
-/* SPARKLES — twinkling golden light points over the village map.
-   Replaces the earlier butterfly effect: fixed gold color (no CSS
-   variable inside SVG, no emoji-rendering differences across phones)
-   and visually matches the existing golden light sweep. */
+/* SPARKLES — twinkling star-shaped light points along the village path.
+   Rendered as a small 4-point star SVG (white core + gold glow via
+   drop-shadow, per IDENTIDAD_VISUAL_MIA_VILLAGE.md) instead of a plain
+   circle, so they read as "estrellitas brillantes" and not flat gold
+   blobs. Positions come from the actual path between stations (see
+   buildGoldenPath in app.js) instead of scattered randomly, so they
+   never float over open sky or rooftops. Sized up and with a higher
+   opacity floor + stronger double glow so they stay clearly visible
+   against the busy, already-golden artwork instead of blending in. */
 .sparkle {
   position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 7px 2px rgba(218,161,41,0.85);
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+  filter: drop-shadow(0 0 3px rgba(255,255,255,0.9)) drop-shadow(0 0 9px rgba(218,161,41,1));
   pointer-events: none;
+  transform: translate(-50%, -50%);
   animation: sparkle-twinkle ease-in-out infinite;
 }
 @keyframes sparkle-twinkle {
-  0%, 100% { opacity: 0; transform: scale(0.4); }
-  50%      { opacity: 1; transform: scale(1.3); }
+  0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.6); }
+  50%      { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* GOLDEN PATH OF LIGHT — connects the 5 stations. A subtle static line
+   marks the route (drawn in once as the map loads, like .map-sweep),
+   and a bright pulse keeps traveling along it afterward in a loop —
+   the "efecto de movimiento visible" is the ongoing pulse, not the
+   base line, which stays put so the route is legible at rest. */
+.golden-path-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.golden-path {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 3;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 4px rgba(218,161,41,0.85));
+  opacity: 0.4;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: golden-path-draw 1.8s ease-out 0.5s 1 forwards;
+}
+@keyframes golden-path-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.golden-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, var(--gold) 65%, rgba(218,161,41,0) 100%);
+  box-shadow: 0 0 12px 4px rgba(218,161,41,0.9);
+  pointer-events: none;
+  opacity: 0;
+  offset-distance: 0%;
+  animation: golden-pulse-travel 4.5s linear 2.3s infinite;
+}
+@keyframes golden-pulse-travel {
+  0%   { offset-distance: 0%; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
 }
 
 /* VILLAGE MODAL — "Ventana de la Aldea" */
@@ -539,8 +593,11 @@ a:focus-visible, button:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
-  .sparkle, .map-sweep { display: none; }
+  .sparkle, .map-sweep, .golden-pulse { display: none; }
   .map-img { animation: none !important; opacity: 1; transform: none; }
+  .golden-path { animation: none !important; stroke-dashoffset: 0 !important; opacity: 0.6; }
+  .onboarding-frame-img { animation: none !important; }
+  .onboarding-frame.frame-pulse::before { animation: none !important; content: none; }
 }
 
 /* ============================================================
@@ -584,6 +641,12 @@ a:focus-visible, button:focus-visible {
   width: 79.5%;
   height: 73.05%;
   object-fit: cover;
+  /* hero-photo.webp es más ancha que la ventana del marco, así que
+     "cover" siempre recorta los costados. Mía está corrida hacia la
+     derecha en la foto original — con la posición por defecto (50%)
+     su mano/muñeco quedaban cortados por el borde derecho del marco.
+     90% desplaza el recorte hacia esa zona para que quede completa. */
+  object-position: 90% center;
   border-radius: 46% 46% 12% 12% / 30% 30% 8% 8%;
 }
 .onboarding-frame-img {
@@ -592,6 +655,36 @@ a:focus-visible, button:focus-visible {
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+/* Pulso de luz dorada alrededor del marco — solo mientras se ve el
+   paso 1 del onboarding (primera impresión). La clase la pone/quita
+   JS en showOnboardingStep (app.js), no un selector :has() — algunos
+   navegadores no lo soportan y la regla se invalida por completo, sin
+   fallback visible.
+   Dos capas: un anillo que se expande desde el borde del marco hacia
+   el fondo liso (mucho más notorio, porque ahí sí hay contraste real
+   contra el fondo, a diferencia del glow pegado al marco que se perdía
+   contra su propio dorado) + el drop-shadow original sobre la imagen,
+   que sigue el contorno real del arco (es un PNG, no un rectángulo). */
+.onboarding-frame.frame-pulse::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 46% 46% 12% 12% / 30% 30% 8% 8%;
+  pointer-events: none;
+  animation: frame-ring-pulse 2.2s ease-out infinite;
+}
+@keyframes frame-ring-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(218,161,41,0.6); }
+  70%  { box-shadow: 0 0 0 24px rgba(218,161,41,0); }
+  100% { box-shadow: 0 0 0 24px rgba(218,161,41,0); }
+}
+.onboarding-frame.frame-pulse .onboarding-frame-img {
+  animation: frame-glow-pulse 2.2s ease-in-out infinite;
+}
+@keyframes frame-glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(218,161,41,0)); }
+  50%      { filter: drop-shadow(0 0 18px rgba(218,161,41,0.95)); }
 }
 .onboarding-title { margin: 0 0 6px; }
 .onboarding-title-script {

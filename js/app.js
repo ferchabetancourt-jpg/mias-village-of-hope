@@ -73,24 +73,189 @@ if (miaAudio && miaAudioBtn) {
   });
 }
 
-// Destellos de luz dorada — solo en la pantalla del mapa (screen-home).
-// Reemplaza el efecto de mariposas: color fijo (no variable CSS), sin
-// depender de que el navegador renderice un emoji — mismo enfoque
-// seguro que ya usamos para el barrido de luz (.map-sweep).
-function createSparkles(containerSelector, count) {
-  document.querySelectorAll(containerSelector).forEach(container => {
-    for (let i = 0; i < count; i++) {
-      const s = document.createElement("span");
-      s.className = "sparkle";
-      s.style.left = (Math.random() * 90 + 3).toFixed(1) + "%";
-      s.style.top = (Math.random() * 88 + 4).toFixed(1) + "%";
-      s.style.animationDelay = (Math.random() * 4).toFixed(2) + "s";
-      s.style.animationDuration = (2 + Math.random() * 2).toFixed(2) + "s";
-      container.appendChild(s);
-    }
+// Camino de luz dorada + destellos — solo en la pantalla del mapa
+// (screen-home). Antes los destellos caían en posiciones al azar sobre
+// todo el mapa (a veces flotando en el cielo o sobre los techos, sin
+// relación con el camino ilustrado). Ahora se calculan a partir de las
+// estaciones reales (.hotspot) de cada mapa: se traza un camino que las
+// conecta en orden y los destellos se colocan sobre ese camino, igual
+// que el brillo animado del SVG (.golden-path). Así ambos elementos
+// quedan alineados con la ilustración en mobile y desktop, sin importar
+// si las coordenadas de las estaciones cambian más adelante.
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+// Estrella de 4 puntas (viewBox 0 0 24 24) para los destellos —
+// "estrellitas brillantes", no círculos.
+const SPARKLE_STAR_D = "M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z";
+
+// Coordenadas trazadas a mano sobre el camino de piedra real de cada
+// ilustración del mapa (medidas con una grilla sobre village-map-mobile.png
+// y village-map-desktop.png, no calculadas desde los hotspots). Se usan
+// SOLO para la línea/pulso del camino — los destellos siguen anclados a
+// los hotspots (hotspotCenters/pathPoints), sin cambios.
+// [x%, y%] en el sistema de coordenadas de cada imagen completa.
+// Trade-off: si se rediseña el mapa, hay que volver a trazar esto.
+const TRACED_PATH = {
+  mobile: [
+    [47.5,22.0],[48.0,24.2],[43.4,25.5],[34.7,26.6],[24.3,27.2],[16.2,27.5],
+    [8.7,28.6],[5.8,30.8],[7.5,33.5],[14.5,35.2],[23.1,35.7],[31.8,36.0],
+    [39.4,36.5],[45.1,37.9],[48.0,40.1],[46.3,42.0],[53.2,42.8],[60.2,43.4],
+    [55.6,46.7],[46.3,49.4],[38.2,51.6],[32.4,57.7],[25.5,63.2],[23.1,68.1],
+    [17.4,70.8],[11.6,74.1],[15.0,76.3],[32.4,74.1],[49.0,73.0],[60.2,70.8],
+    [67.1,69.2],[70.6,73.0],[72.3,78.0],[73.0,82.4],[73.0,84.6]
+  ],
+  desktop: [
+    [23.33,45.16],[22.43,48.88],[17.94,52.07],[14.35,54.73],[11.96,56.32],
+    [13.46,58.45],[17.94,59.51],[23.33,58.98],[28.41,57.39],[32.89,55.79],
+    [37.38,53.13],[40.37,51.01],[40.67,56.32],[44.86,57.92],[49.04,60.57],
+    [53.83,61.64],[56.82,58.98],[57.84,59.19],[61.79,60.89],[65.79,62.38],
+    [69.80,63.02],[72.79,63.76],[76.73,62.70],[80.74,61.32],[84.75,62.17],
+    [88.70,62.70],[87.92,69.07],[85.53,74.39],[84.03,76.41]
+  ]
+};
+
+function parsePercent(value) {
+  return parseFloat(value) || 0;
+}
+
+// Cada hotspot cubre todo el edificio/estación (para que sea fácil de
+// tocar), pero el camino ilustrado pasa por su base, no por el centro
+// vertical de la caja. Por eso el punto se toma cerca del borde
+// inferior del hotspot en vez de su centro exacto.
+function hotspotCenters(wrap) {
+  return [...wrap.querySelectorAll(".hotspot")].map(hotspot => {
+    const left = parsePercent(hotspot.style.left);
+    const top = parsePercent(hotspot.style.top);
+    const width = parsePercent(hotspot.style.width);
+    const height = parsePercent(hotspot.style.height);
+    return { x: left + width / 2, y: top + height * 0.85 };
   });
 }
-createSparkles(".map-wrap", 9);
+
+// Punto sobre el segmento a-b (en la fracción t), desplazado
+// perpendicularmente para que el camino se sienta sinuoso en vez de una
+// línea recta entre estaciones.
+function jitteredPoint(a, b, t, sign) {
+  const mx = a.x + (b.x - a.x) * t;
+  const my = a.y + (b.y - a.y) * t;
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  const len = Math.hypot(dx, dy) || 1;
+  const px = -dy / len;
+  const py = dx / len;
+  const jitter = 4; // % del ancho/alto del contenedor
+  return { x: mx + px * jitter * sign, y: my + py * jitter * sign };
+}
+
+// Tres puntos intermedios por tramo (en vez de dos) para que haya más
+// destellos a lo largo del camino — antes eran 9, luego 13, ahora 17.
+// Siguen anclados cerca del camino a propósito: si se reparten por
+// todo el mapa vuelven a caer sobre el cielo o los techos, donde no
+// se notan.
+function pathPoints(centers) {
+  const points = [];
+  centers.forEach((center, i) => {
+    points.push(center);
+    if (i < centers.length - 1) {
+      const next = centers[i + 1];
+      const sign = i % 2 === 0 ? 1 : -1;
+      points.push(jitteredPoint(center, next, 0.25, sign));
+      points.push(jitteredPoint(center, next, 0.5, -sign));
+      points.push(jitteredPoint(center, next, 0.75, sign));
+    }
+  });
+  return points;
+}
+
+// Curva suave (Catmull-Rom convertida a Bézier cúbica) a través de los
+// puntos, en vez de tramos rectos — evita el zig-zag anguloso que deja
+// un trazo recto entre estación y punto medio.
+function smoothPathD(points) {
+  let d = `M ${points[0].x} ${points[0].y}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[i - 1] || points[i];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[i + 2] || p2;
+    const cp1x = p1.x + (p2.x - p0.x) / 6;
+    const cp1y = p1.y + (p2.y - p0.y) / 6;
+    const cp2x = p2.x - (p3.x - p1.x) / 6;
+    const cp2y = p2.y - (p3.y - p1.y) / 6;
+    d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
+  }
+  return d;
+}
+
+function buildGoldenPath(wrap) {
+  const rect = wrap.getBoundingClientRect();
+  if (!rect.width || !rect.height) return; // oculto en este breakpoint
+
+  wrap.querySelectorAll(".sparkle, .golden-path-svg, .golden-pulse").forEach(el => el.remove());
+
+  const centers = hotspotCenters(wrap);
+  if (centers.length < 2) return;
+  // Los destellos siguen anclados a los hotspots (sin cambios).
+  const points = pathPoints(centers);
+
+  // La línea/pulso, en cambio, sigue el camino real trazado a mano
+  // sobre la ilustración (TRACED_PATH) — no los puntos de arriba.
+  const tracedKey = wrap.classList.contains("map-wrap-desktop") ? "desktop" : "mobile";
+  const tracedPixelPoints = TRACED_PATH[tracedKey].map(([x, y]) => ({
+    x: (x / 100) * rect.width,
+    y: (y / 100) * rect.height
+  }));
+
+  // SVG con viewBox igual al tamaño real del contenedor, para que el
+  // grosor del trazo no se distorsione entre mobile y desktop.
+  const svg = document.createElementNS(SVG_NS, "svg");
+  svg.setAttribute("class", "golden-path-svg");
+  svg.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`);
+  svg.setAttribute("aria-hidden", "true");
+
+  const d = smoothPathD(tracedPixelPoints);
+  const path = document.createElementNS(SVG_NS, "path");
+  path.setAttribute("class", "golden-path");
+  path.setAttribute("d", d);
+  // pathLength normaliza el largo del trazo a 100 unidades abstractas,
+  // sin importar cuántos px mida en mobile vs. desktop — así el
+  // stroke-dasharray:100 del CSS siempre dibuja el camino completo.
+  path.setAttribute("pathLength", "100");
+  svg.appendChild(path);
+  wrap.appendChild(svg);
+
+  // Punto de luz que viaja en loop por el mismo trazo — el efecto de
+  // movimiento visible que conecta las 5 estaciones (no solo la línea
+  // estática de fondo).
+  const pulse = document.createElement("span");
+  pulse.className = "golden-pulse";
+  pulse.style.offsetPath = `path('${d}')`;
+  wrap.appendChild(pulse);
+
+  points.forEach(p => {
+    const s = document.createElementNS(SVG_NS, "svg");
+    s.setAttribute("class", "sparkle");
+    s.setAttribute("viewBox", "0 0 24 24");
+    s.setAttribute("aria-hidden", "true");
+    s.style.left = p.x.toFixed(1) + "%";
+    s.style.top = p.y.toFixed(1) + "%";
+    s.style.animationDelay = (Math.random() * 4).toFixed(2) + "s";
+    s.style.animationDuration = (2 + Math.random() * 2).toFixed(2) + "s";
+    const star = document.createElementNS(SVG_NS, "path");
+    star.setAttribute("d", SPARKLE_STAR_D);
+    s.appendChild(star);
+    wrap.appendChild(s);
+  });
+}
+
+function buildGoldenPaths() {
+  document.querySelectorAll(".map-wrap").forEach(buildGoldenPath);
+}
+
+let resizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(buildGoldenPaths, 200);
+});
 
 // ============================================================
 // ONBOARDING — one fixed screen (window + photo never move).
@@ -103,12 +268,28 @@ function showTopScreen(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   const target = document.getElementById(id);
   if (target) target.classList.add("active");
+  // El mapa recién tiene tamaño real una vez que screen-home queda
+  // visible, así que el camino dorado y los destellos se construyen
+  // justo aquí (antes, al correr en la carga inicial con el mapa
+  // todavía oculto por el onboarding, medían 0×0 y no se dibujaban).
+  if (id === "screen-home") buildGoldenPaths();
 }
+
+const onboardingFrame = document.querySelector(".onboarding-frame");
 
 function showOnboardingStep(id) {
   document.querySelectorAll(".onboarding-step").forEach(s => s.classList.remove("active"));
   const target = document.getElementById(id);
   if (target) target.classList.add("active");
+  // El pulso alrededor del marco solo corre en el paso 1 (primera
+  // impresión). Se controla con una clase por JS en vez de un
+  // selector :has() en CSS: :has() no lo soportan todos los
+  // navegadores, y ahí la regla entera se invalida sin aviso. La clase
+  // va en el contenedor (.onboarding-frame), no en la imagen, porque
+  // el anillo que se expande es un ::before del contenedor.
+  if (onboardingFrame) {
+    onboardingFrame.classList.toggle("frame-pulse", id === "onboarding-step-1");
+  }
 }
 
 document.querySelectorAll(".onboarding-next").forEach(btn => {
@@ -125,6 +306,11 @@ if (onboardingEnterBtn) {
     showTopScreen("screen-home");
   });
 }
+
+// El paso 1 ya viene marcado "active" en el HTML estático, pero el
+// pulso del marco depende de la clase que pone esta función — sin
+// esta llamada no arranca hasta el primer click en "Enter".
+showOnboardingStep("onboarding-step-1");
 
 // Decide what to show first, as soon as the script runs.
 if (localStorage.getItem(ONBOARDING_HIDE_KEY) === "true") {
