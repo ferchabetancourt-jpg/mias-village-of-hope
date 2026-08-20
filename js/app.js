@@ -32,6 +32,18 @@ closers.forEach(btn => {
   btn.addEventListener("click", closeModal);
 });
 
+// Navegación entre paneles sin cerrar el modal (ej. botón "Ways to help"
+// dentro de Meet Mía, que lleva directo a This Week's Needs).
+document.querySelectorAll(".panel-nav").forEach(btn => {
+  btn.addEventListener("click", () => {
+    panels.forEach(p => p.classList.remove("active"));
+    const target = document.getElementById(btn.dataset.target);
+    if (target) target.classList.add("active");
+    const scrollArea = modal.querySelector(".village-modal-scroll");
+    if (scrollArea) scrollArea.scrollTop = 0;
+  });
+});
+
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && modal.classList.contains("active")) closeModal();
 });

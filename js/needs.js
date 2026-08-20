@@ -33,21 +33,63 @@ async function loadNeeds() {
       return;
     }
 
-    container.innerHTML = needs.map(rowToNeedHTML).join("");
+    container.innerHTML = summaryHTML(needs) + needs.map(rowToNeedHTML).join("");
   } catch (err) {
     container.innerHTML = `<p class="needs-empty">Needs will appear here once the list is connected.</p>`;
     console.error("Could not load needs sheet:", err);
   }
 }
 
+function parseMoney(value) {
+  return parseFloat(String(value || "").replace(/[^0-9.-]/g, "")) || 0;
+}
+
+function isNeedCovered(row) {
+  return (row[6] || "").toLowerCase().includes("listo");
+}
+
+// Resumen arriba de la lista: cuántas necesidades ya se cubrieron y
+// cuánto se ha recogido en total esta semana — en texto simple, sin
+// barra de progreso (eso queda para Fase 2).
+function summaryHTML(needs) {
+  const coveredCount = needs.filter(isNeedCovered).length;
+  const totalCovered = needs.reduce((sum, row) => sum + parseMoney(row[4]), 0);
+  if (coveredCount === 0 && totalCovered === 0) return "";
+  const needWord = coveredCount === 1 ? "need" : "needs";
+  return `<p class="needs-summary">${coveredCount} ${needWord} fully covered — $${totalCovered.toFixed(0)} raised so far this week 💛</p>`;
+}
+
+function mailtoForNeed(item) {
+  const subject = encodeURIComponent(`I can help with: ${item}`);
+  const body = encodeURIComponent(`Hi! I'd like to help with this need for Mía's Village:\n\n${item}\n\n`);
+  return `mailto:miasvillageofhope@gmail.com?subject=${subject}&body=${body}`;
+}
+
 function rowToNeedHTML(row) {
   const [, , item, needed, covered, , status, remaining] = row;
-  const isCovered = (status || "").toLowerCase().includes("listo");
-  const label = isCovered ? "✅ Covered — thank you!" : `🟡 Still needed${remaining ? " — $" + remaining : ""}`;
+  const isCovered = isNeedCovered(row);
+  const label = isCovered ? "✅ Covered — thank you!" : "🟡 Still needed";
+
+  const amountParts = [];
+  if (needed) amountParts.push(`$${needed} needed`);
+  if (covered) amountParts.push(`$${covered} covered so far`);
+  if (!isCovered && remaining) amountParts.push(`$${remaining} remaining`);
+  const amounts = amountParts.length
+    ? `<div class="need-amounts">${amountParts.join(" · ")}</div>`
+    : "";
+
+  const helpBtn = isCovered
+    ? ""
+    : `<a class="need-help-btn" href="${mailtoForNeed(item || "")}">I can help →</a>`;
+
   return `
     <div class="need-item ${isCovered ? "covered" : ""}">
-      <span>${item || ""}</span>
-      <span class="need-status">${label}</span>
+      <div class="need-main">
+        <span class="need-title">${item || ""}</span>
+        <span class="need-status">${label}</span>
+      </div>
+      ${amounts}
+      ${helpBtn}
     </div>
   `;
 }
