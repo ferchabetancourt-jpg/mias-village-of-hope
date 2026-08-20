@@ -71,7 +71,7 @@
   </ul>
 </nav>
 
-<!-- ONBOARDING — one fixed screen (window + photo never move); 3 steps
+<!-- ONBOARDING — one fixed screen (window + photo never move); 2 steps
      of content swap underneath it -->
 <section id="screen-onboarding" class="screen screen-onboarding active">
   <div class="onboarding-inner">
@@ -89,13 +89,7 @@
       </h1>
       <p class="onboarding-tagline" data-en="It Takes a Village. This Is Mía's." data-es="Se necesita una aldea. Esta es la de Mía.">It Takes a Village. This Is Mía's.</p>
       <p class="onboarding-serious-text" data-en="Mía is 5, and she's fighting hard. This is where her family, friends and community come together to walk it with her." data-es="Mía tiene 5 años y está luchando con todas sus fuerzas. Aquí es donde su familia, amigos y comunidad se unen para acompañarla.">Mía is 5, and she's fighting hard. This is where her family, friends and community come together to walk it with her.</p>
-      <button class="btn btn-primary onboarding-next" data-next="onboarding-step-2" data-en="Enter" data-es="Entrar">Enter</button>
-    </div>
-
-    <!-- STEP 2 -->
-    <div class="onboarding-step" id="onboarding-step-2">
-      <p class="onboarding-text" data-en="Mía is 5 years old, fighting with all her heart. Here you can pray for her, cheer her on, and be part of her village — in whatever way you can." data-es="Mía tiene 5 años y está luchando con todo su corazón. Aquí puedes orar por ella, animarla, y ser parte de su aldea — de la forma que tú puedas.">Mía is 5 years old, fighting with all her heart. Here you can pray for her, cheer her on, and be part of her village — in whatever way you can.</p>
-      <button class="btn btn-primary onboarding-next" data-next="onboarding-step-3" data-en="Meet Mía" data-es="Conocer a Mía">Meet Mía</button>
+      <button class="btn btn-primary onboarding-next" data-next="onboarding-step-3" data-en="Enter" data-es="Entrar">Enter</button>
     </div>
 
     <!-- STEP 3 -->
@@ -197,10 +191,16 @@
 <!-- MEET MÍA -->
 <section id="screen-meet-mia" class="modal-panel">
   <div class="screen-inner">
-    <button class="back-btn" data-close>
-      <span aria-hidden="true">←</span>
-      <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
-    </button>
+    <div class="panel-topbar">
+      <button class="back-btn" data-close aria-label="Back to the Village" data-aria-en="Back to the Village" data-aria-es="Volver a la Aldea">
+        <span aria-hidden="true">←</span>
+        <span data-en="Back" data-es="Volver">Back</span>
+      </button>
+      <button class="next-station-btn panel-nav" data-target="screen-village" aria-label="Next: The Village" data-aria-en="Next: The Village" data-aria-es="Siguiente: La Aldea">
+        <span data-en="Next" data-es="Siguiente">Next</span>
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
     <div class="meet-mia-header">
       <p class="eyebrow" data-en="Meet Mía" data-es="Conoce a Mía">Meet Mía</p>
       <h1 data-en="A five-year-old fighting with joy" data-es="Una niña de cinco años luchando con alegría">A five-year-old fighting with joy</h1>
@@ -226,7 +226,7 @@
     </div>
 
     <div class="meet-mia-cta">
-      <button class="btn btn-primary panel-nav" data-target="screen-needs" data-en="Ways to help" data-es="Formas de ayudar">Ways to help</button>
+      <button class="btn btn-primary panel-nav" data-target="screen-needs" data-en="The Village Needs" data-es="La Aldea Necesita">The Village Needs</button>
     </div>
 
     <div class="meet-mia-story">
@@ -268,26 +268,26 @@
       </div>
 
       <div class="meet-mia-cta">
-        <button class="btn btn-primary panel-nav" data-target="screen-needs" data-en="Ways to help" data-es="Formas de ayudar">Ways to help</button>
+        <button class="btn btn-primary panel-nav" data-target="screen-needs" data-en="The Village Needs" data-es="La Aldea Necesita">The Village Needs</button>
       </div>
     </div>
 
-    <div class="station-next">
-      <button class="next-station-btn panel-nav" data-target="screen-village">
-        <span data-en="Next: The Village" data-es="Siguiente: La Aldea">Next: The Village</span>
-        <span class="next-arrow" aria-hidden="true">→</span>
-      </button>
-    </div>
   </div>
 </section>
 
 <!-- THE VILLAGE -->
 <section id="screen-village" class="modal-panel">
   <div class="screen-inner">
-    <button class="back-btn" data-close>
-      <span aria-hidden="true">←</span>
-      <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
-    </button>
+    <div class="panel-topbar">
+      <button class="back-btn" data-close aria-label="Back to the Village" data-aria-en="Back to the Village" data-aria-es="Volver a la Aldea">
+        <span aria-hidden="true">←</span>
+        <span data-en="Back" data-es="Volver">Back</span>
+      </button>
+      <button class="next-station-btn panel-nav" data-target="screen-needs" aria-label="Next: This Week's Needs" data-aria-en="Next: This Week's Needs" data-aria-es="Siguiente: Necesidades de esta Semana">
+        <span data-en="Next" data-es="Siguiente">Next</span>
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
     <div class="station-header">
       <img src="images/polaroid-village.webp" alt="Mía in her witch costume" class="station-polaroid rot-a">
       <div>
@@ -340,28 +340,27 @@
       </div>
     </div>
 
-    <!-- PLACEHOLDER: links reales de FB y WhatsApp (GoFundMe y Zelle viven solo en Contact) -->
     <div class="village-actions">
-      <a href="PLACEHOLDER_FACEBOOK_URL" class="btn btn-primary" target="_blank" rel="noopener" data-en="Follow on Facebook" data-es="Síguenos en Facebook">Follow on Facebook</a>
-      <a href="PLACEHOLDER_WHATSAPP_URL" class="btn btn-ghost-dark" target="_blank" rel="noopener" data-en="Join WhatsApp Community" data-es="Únete a la Comunidad de WhatsApp">Join WhatsApp Community</a>
+      <a href="https://www.facebook.com/profile.php?id=61593459297860" class="btn btn-primary" target="_blank" rel="noopener" data-en="Follow on Facebook" data-es="Síguenos en Facebook">Follow on Facebook</a>
+      <a href="https://chat.whatsapp.com/ECNqCHebKnv8JJXzsBJNhq" class="btn btn-ghost-dark" target="_blank" rel="noopener" data-en="Join WhatsApp Community" data-es="Únete a la Comunidad de WhatsApp">Join WhatsApp Community</a>
     </div>
 
-    <div class="station-next">
-      <button class="next-station-btn panel-nav" data-target="screen-needs">
-        <span data-en="Next: This Week's Needs" data-es="Siguiente: Necesidades de esta Semana">Next: This Week's Needs</span>
-        <span class="next-arrow" aria-hidden="true">→</span>
-      </button>
-    </div>
   </div>
 </section>
 
 <!-- THIS WEEK'S NEEDS -->
 <section id="screen-needs" class="modal-panel">
   <div class="screen-inner">
-    <button class="back-btn" data-close>
-      <span aria-hidden="true">←</span>
-      <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
-    </button>
+    <div class="panel-topbar">
+      <button class="back-btn" data-close aria-label="Back to the Village" data-aria-en="Back to the Village" data-aria-es="Volver a la Aldea">
+        <span aria-hidden="true">←</span>
+        <span data-en="Back" data-es="Volver">Back</span>
+      </button>
+      <button class="next-station-btn panel-nav" data-target="screen-collaborators" aria-label="Next: Collaborators" data-aria-en="Next: Collaborators" data-aria-es="Siguiente: Colaboradores">
+        <span data-en="Next" data-es="Siguiente">Next</span>
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
     <div class="station-header">
       <img src="images/polaroid-needs.webp" alt="Mía with her teddy bear at the hospital" class="station-polaroid rot-b">
       <div>
@@ -374,28 +373,31 @@
       <p class="needs-empty" data-en="Loading this week's needs…" data-es="Cargando las necesidades de esta semana…">Loading this week's needs…</p>
     </div>
 
-    <div class="station-next">
-      <button class="next-station-btn panel-nav" data-target="screen-collaborators">
-        <span data-en="Next: Collaborators" data-es="Siguiente: Colaboradores">Next: Collaborators</span>
-        <span class="next-arrow" aria-hidden="true">→</span>
-      </button>
-    </div>
   </div>
 </section>
 
 <!-- COLLABORATORS -->
 <section id="screen-collaborators" class="modal-panel">
   <div class="screen-inner">
-    <button class="back-btn" data-close>
-      <span aria-hidden="true">←</span>
-      <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
-    </button>
+    <div class="panel-topbar">
+      <button class="back-btn" data-close aria-label="Back to the Village" data-aria-en="Back to the Village" data-aria-es="Volver a la Aldea">
+        <span aria-hidden="true">←</span>
+        <span data-en="Back" data-es="Volver">Back</span>
+      </button>
+      <button class="next-station-btn panel-nav" data-target="screen-contact" aria-label="Next: Contact" data-aria-en="Next: Contact" data-aria-es="Siguiente: Contacto">
+        <span data-en="Next" data-es="Siguiente">Next</span>
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
     <div class="station-header">
       <img src="images/polaroid-collaborators.webp" alt="Mía at the aquarium" class="station-polaroid rot-a">
       <div>
         <p class="eyebrow" data-en="Collaborators" data-es="Colaboradores">Collaborators</p>
         <h1 data-en="Businesses giving back" data-es="Negocios que retribuyen">Businesses giving back</h1>
       </div>
+    </div>
+    <div class="collab-join-cta">
+      <a href="mailto:miasvillageofhope@gmail.com" class="btn btn-ghost-dark" data-en="Want to join?" data-es="¿Quieres unirte?">Want to join?</a>
     </div>
     <p data-en="People in Mía's life who are turning what they do into support for her."
        data-es="Personas en la vida de Mía que convierten lo que hacen en apoyo para ella.">
@@ -453,22 +455,22 @@
       <p>[Pending: final approved text about Celpa Clinic]</p>
     </div>
 
-    <div class="station-next">
-      <button class="next-station-btn panel-nav" data-target="screen-contact">
-        <span data-en="Next: Contact" data-es="Siguiente: Contacto">Next: Contact</span>
-        <span class="next-arrow" aria-hidden="true">→</span>
-      </button>
-    </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="screen-contact" class="modal-panel">
   <div class="screen-inner">
-    <button class="back-btn" data-close>
-      <span aria-hidden="true">←</span>
-      <span data-en="Back to the Village" data-es="Volver a la Aldea">Back to the Village</span>
-    </button>
+    <div class="panel-topbar">
+      <button class="back-btn" data-close aria-label="Back to the Village" data-aria-en="Back to the Village" data-aria-es="Volver a la Aldea">
+        <span aria-hidden="true">←</span>
+        <span data-en="Back" data-es="Volver">Back</span>
+      </button>
+      <button class="next-station-btn panel-nav" data-target="screen-meet-mia" aria-label="Next: Meet Mía" data-aria-en="Next: Meet Mía" data-aria-es="Siguiente: Conoce a Mía">
+        <span data-en="Next" data-es="Siguiente">Next</span>
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
     <div class="station-header">
       <img src="images/polaroid-contact.webp" alt="Mía riding a carousel horse" class="station-polaroid rot-b">
       <div>
@@ -482,13 +484,12 @@
     </p>
     <div class="contact-group">
       <h2 class="contact-group-title" data-en="Stay Connected" data-es="Mantente Conectado">Stay Connected</h2>
-      <!-- PLACEHOLDER: reemplazar Facebook y WhatsApp cuando estén los links reales -->
       <div class="contact-grid">
-        <a href="PLACEHOLDER_FACEBOOK_URL" class="contact-btn" target="_blank" rel="noopener">
+        <a href="https://www.facebook.com/profile.php?id=61593459297860" class="contact-btn" target="_blank" rel="noopener">
           <img src="images/icon-facebook.webp" alt="" class="contact-icon">
           <span data-en="Facebook" data-es="Facebook">Facebook</span>
         </a>
-        <a href="PLACEHOLDER_WHATSAPP_URL" class="contact-btn" target="_blank" rel="noopener">
+        <a href="https://chat.whatsapp.com/ECNqCHebKnv8JJXzsBJNhq" class="contact-btn" target="_blank" rel="noopener">
           <img src="images/icon-whatsapp.webp" alt="" class="contact-icon">
           <span data-en="WhatsApp Community" data-es="Comunidad de WhatsApp">WhatsApp Community</span>
         </a>
@@ -531,13 +532,6 @@
     </div>
 
     <p class="footer-tagline" data-en="It Takes a Village. This Is Mía's. 💛" data-es="Se necesita una aldea. Esta es la de Mía. 💛">It Takes a Village. This Is Mía's. 💛</p>
-
-    <div class="station-next">
-      <button class="next-station-btn panel-nav" data-target="screen-meet-mia">
-        <span data-en="Next: Meet Mía" data-es="Siguiente: Conoce a Mía">Next: Meet Mía</span>
-        <span class="next-arrow" aria-hidden="true">→</span>
-      </button>
-    </div>
   </div>
 </section>
 

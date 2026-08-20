@@ -33,7 +33,14 @@ async function loadNeeds() {
       return;
     }
 
-    container.innerHTML = summaryHTML(needs) + needs.map(rowToNeedHTML).join("");
+    const stillNeeded = needs.filter(row => !isNeedCovered(row));
+    const covered = needs.filter(isNeedCovered);
+    const sections = [
+      stillNeeded.length ? sectionHTML("🟡 Still needed", stillNeeded) : "",
+      covered.length ? sectionHTML("✅ Already covered — thank you!", covered) : ""
+    ].join("");
+
+    container.innerHTML = summaryHTML(needs) + sections;
   } catch (err) {
     container.innerHTML = `<p class="needs-empty">Needs will appear here once the list is connected.</p>`;
     console.error("Could not load needs sheet:", err);
@@ -63,6 +70,16 @@ function mailtoForNeed(item) {
   const subject = encodeURIComponent(`I can help with: ${item}`);
   const body = encodeURIComponent(`Hi! I'd like to help with this need for Mía's Village:\n\n${item}\n\n`);
   return `mailto:miasvillageofhope@gmail.com?subject=${subject}&body=${body}`;
+}
+
+// Groups needs into two clearly-labeled sections so a visitor sees at a
+// glance what's still open vs. what's already covered, instead of reading
+// each row's status one by one.
+function sectionHTML(title, rows) {
+  return `
+    <p class="needs-section-title">${title}</p>
+    ${rows.map(rowToNeedHTML).join("")}
+  `;
 }
 
 function rowToNeedHTML(row) {

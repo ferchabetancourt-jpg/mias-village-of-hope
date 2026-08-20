@@ -75,15 +75,15 @@ Meta de entrega: lunes 24 agosto 2026
 
 ## 🏁 ÚLTIMOS PENDIENTES — última ronda antes del lanzamiento (20 agosto)
 
-### Código
-- [ ] Bug: quitar pantalla 2 duplicada del onboarding (NO la 1)
-- [ ] Botón "siguiente estación": mover arriba, extremo opuesto al botón "volver"
-- [ ] Foto de Mía por estación: agrandar (mismo alto vertical que el título)
-- [ ] Fondo de las estaciones: cambiar de crema a verde pálido (`--green` #EAF3C9), igual que el fondo del mapa
-- [ ] Meet Mía: texto del botón cambia a "La Aldea Necesita" (mismo link)
-- [ ] This Week's Needs: rediseño de claridad — qué ve quien aporta, qué ve Sonia (vía /actualizar)
-- [ ] Collaborators: botón "¿Quieres unirte?" debajo del título, link a mailto:miasvillageofhope@gmail.com
-- [ ] Contact: agregar links de Facebook y WhatsApp (ya definidos); GoFundMe y Zelle quedan en placeholder hasta que existan las cuentas
+### Código ✅ COMPLETADO (20 agosto 2026)
+- [x] Bug: quitar pantalla 2 duplicada del onboarding (NO la 1) — Step 2 repetía el texto del Step 1 sin aportar nada; onboarding pasó de 3 a 2 pantallas de contenido
+- [x] Botón "siguiente estación": mover arriba, extremo opuesto al botón "volver" — ahora viven en una fila (`.panel-topbar`), mismo estilo de pill que "Volver", etiqueta corta ("Back"/"Next") con el texto completo como `aria-label` para que no queden apretados en mobile
+- [x] Foto de Mía por estación: agrandar (mismo alto vertical que el título) — tamaño fijo (108px, 84px en <380px), centrada verticalmente contra el bloque de título
+- [x] Fondo de las estaciones: cambiar de crema a verde pálido (`--green` #EAF3C9), igual que el fondo del mapa — variable `--green` creada (no existía en el CSS pese a estar documentada); solo el fondo general cambia, las tarjetas internas (village-card, need-item, trust-card, collaborator-card) se quedan blancas/crema para resaltar como tarjetas
+- [x] Meet Mía: texto del botón cambia a "The Village Needs" / "La Aldea Necesita" (mismo link)
+- [x] This Week's Needs: rediseño de claridad — `js/needs.js` ahora agrupa "🟡 Still needed" primero y "✅ Covered" después con encabezados de sección, en vez de mezclar el orden del CSV. Nota: `/actualizar.html` (lista + formulario lado a lado para Sonia) ya existía en el código, no estaba marcado aquí — confirmado con Fercha.
+- [x] Collaborators: botón "¿Quieres unirte?" debajo del título, link a mailto:miasvillageofhope@gmail.com
+- [x] Contact: agregar links de Facebook y WhatsApp — Facebook `facebook.com/profile.php?id=61593459297860`, WhatsApp `chat.whatsapp.com/ECNqCHebKnv8JJXzsBJNhq`; GoFundMe y Zelle quedan en placeholder hasta que existan las cuentas
 - [ ] Contact: copyright discreto al final — "© María Fernanda Betancourt" + link a Behance (bloqueado hasta tener el link a mano)
 
 ### No es código (contenido / cuentas)
