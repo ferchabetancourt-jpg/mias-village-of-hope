@@ -19,6 +19,7 @@ Meta de entrega: lunes 24 agosto 2026
 - [ ] Cuenta de Zelle (junto con mensaje de confianza para mostrarlo)
 - [ ] Texto corto aprobado de Celpa Clinic
 - [x] Info para sección Trust: quién administra, cómo llega la ayuda, quién es la familia, qué gastos cubre — completado 19 agosto: Sonia Celpa (abuela, dueña de Celpa Clinic) como responsable; gastos = traslados/alimentación/médicos no cubiertos por seguro; ayuda llega vía tarjetas de regalo, domicilios, tarjetas con dinero, GoFundMe y Zelle; frase "Managed by Mía's family and close friends" incluida
+- [x] Link del Google Sheet publicado como CSV conectado en `js/needs.js` (20 agosto) — falta que Sonia cargue contenido real
 - [ ] Mínimo 2-3 necesidades reales cargadas en el Google Form
 - ~~Columna "¿es urgente?" en el Google Form~~ — ya no se necesita, se aceptó el sustituto visual "🟡 Still needed" / "✅ Covered" en su lugar (20 agosto)
 
