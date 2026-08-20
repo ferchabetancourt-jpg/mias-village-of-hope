@@ -317,6 +317,18 @@ h1, h2, h3 {
   .station-label { font-size: 0.62rem; padding: 3px 8px; max-width: 100px; }
 }
 
+/* The Village and This Week's Needs sit low/wide in the illustration
+   (the church steps, the market stall counter) — the default centered
+   anchor put the chip right on top of them. Nudged down-right by a
+   fixed pixel offset (added on top of the normal -50%/85% centering,
+   not a % of the hotspot box) so the shift is the same on mobile and
+   desktop even though those two hotspots have very different box
+   sizes between breakpoints. */
+.hotspot[data-target="screen-village"] .station-label,
+.hotspot[data-target="screen-needs"] .station-label {
+  transform: translate(calc(-50% + 16px), calc(85% + 22px));
+}
+
 .map-hint {
   font-family: var(--font-script);
   font-size: 1.3rem;
