@@ -106,11 +106,14 @@
     width:34px; height:34px; border-radius:9px;
     background:var(--cream); border:1.5px solid var(--gold-soft);
     display:flex; align-items:center; justify-content:center;
-    font-size:15px; cursor:pointer;
+    color:var(--burgundy); cursor:pointer;
     transition:background .15s ease, transform .1s ease;
   }
   .lcard .copybtn:active{ transform:scale(0.92); }
+  .lcard .copybtn .icon-check{ display:none; }
   .lcard .copybtn.copied{ background:var(--gold-soft); }
+  .lcard .copybtn.copied .icon-copy{ display:none; }
+  .lcard .copybtn.copied .icon-check{ display:block; }
   .toast{
     position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px);
     background:var(--burgundy); color:#fff; font-family:'Nunito'; font-weight:700; font-size:13px;
@@ -199,25 +202,25 @@
   <a class="lcard" href="https://mias-village-of-hope.vercel.app" target="_blank">
     <div class="ic">🌐</div>
     <div><span class="lab">Página principal (Aldea)</span><span class="url">mias-village-of-hope.vercel.app</span></div>
-    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://mias-village-of-hope.vercel.app')">📋</div>
+    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://mias-village-of-hope.vercel.app')"><svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
   </a>
 
   <a class="lcard" href="https://chat.whatsapp.com/ECNqCHebKnv8JJXzsBJNhq" target="_blank">
     <div class="ic">📱</div>
     <div><span class="lab">Comunidad de WhatsApp</span><span class="url">chat.whatsapp.com/ECNqCHebKnv8JJXzsBJNhq</span></div>
-    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://chat.whatsapp.com/ECNqCHebKnv8JJXzsBJNhq')">📋</div>
+    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://chat.whatsapp.com/ECNqCHebKnv8JJXzsBJNhq')"><svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
   </a>
 
   <a class="lcard" href="https://www.facebook.com/profile.php?id=61593459297860" target="_blank">
     <div class="ic">👥</div>
     <div><span class="lab">Facebook</span><span class="url">facebook.com/MiasVillageOfHope</span></div>
-    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://www.facebook.com/profile.php?id=61593459297860')">📋</div>
+    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://www.facebook.com/profile.php?id=61593459297860')"><svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
   </a>
 
   <a class="lcard" href="mailto:miasvillageofhope@gmail.com" data-copy="miasvillageofhope@gmail.com">
     <div class="ic">✉️</div>
     <div><span class="lab">Email</span><span class="url">miasvillageofhope@gmail.com</span></div>
-    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'miasvillageofhope@gmail.com')">📋</div>
+    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'miasvillageofhope@gmail.com')"><svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
   </a>
 
   <div class="lcard pending">
@@ -234,7 +237,7 @@
   <a class="lcard" href="https://forms.gle/5rz3SEEPzpxGKPEe9" target="_blank">
     <div class="ic">✏️</div>
     <div><span class="lab">Formulario para actualizar</span><span class="url">forms.gle/5rz3SEEPzpxGKPEe9</span></div>
-    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://forms.gle/5rz3SEEPzpxGKPEe9')">📋</div>
+    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://forms.gle/5rz3SEEPzpxGKPEe9')"><svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
   </a>
   <p style="margin-top:14px;">En este formulario vas a poder ver y actualizar la lista actual de necesidades, marcadas así:</p>
   <div class="status-row">
@@ -295,12 +298,12 @@
   <a class="lcard" href="https://mias-village-of-hope.vercel.app" target="_blank">
     <div class="ic">🌐</div>
     <div><span class="lab">Página principal (Aldea)</span><span class="url">mias-village-of-hope.vercel.app</span></div>
-    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://mias-village-of-hope.vercel.app')">📋</div>
+    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://mias-village-of-hope.vercel.app')"><svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
   </a>
   <a class="lcard" href="https://forms.gle/5rz3SEEPzpxGKPEe9" target="_blank">
     <div class="ic">✏️</div>
     <div><span class="lab">Actualizar necesidades (formulario)</span><span class="url">forms.gle/5rz3SEEPzpxGKPEe9</span></div>
-    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://forms.gle/5rz3SEEPzpxGKPEe9')">📋</div>
+    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://forms.gle/5rz3SEEPzpxGKPEe9')"><svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
   </a>
 
 </section>
