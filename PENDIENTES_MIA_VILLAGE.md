@@ -33,7 +33,7 @@ Meta de entrega: lunes 24 agosto 2026
 - [x] Crear cuenta Gmail (para el botón de contacto) — miasvillageofhope@gmail.com
 - [ ] Tener a la mano el link de Behance (para el copyright de Contact)
 - [ ] Reel para redes — invitación a la Aldea, con buen gancho + URL de la web
-- [ ] PDF guía de entrega para la familia (paleta del proyecto, logos, explicación sencilla para Sonia Dueñas, URL pública, URL de /actualizar + explicación de uso)
+- [x] Guía de entrega para la familia — se hizo como página web (`/guia`) en vez de PDF: paleta del proyecto, links de la Aldea, explicación paso a paso de cómo actualizar necesidades, y cómo guardar accesos directos en el teléfono. Oculta (no aparece en el menú ni se enlaza desde el sitio), igual que `/actualizar`.
 
 ---
 
