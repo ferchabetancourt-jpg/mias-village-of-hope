@@ -875,6 +875,15 @@ body.modal-open { overflow: hidden; }
   color: var(--navy);
   text-align: center;
 }
+.contact-btn.pending { opacity: 0.6; cursor: default; }
+.contact-btn.pending:hover { transform: none; }
+.contact-btn .contact-pending-tag {
+  font-size: 0.65rem;
+  color: var(--gold-text);
+  background: rgba(218,161,41,0.15);
+  padding: 2px 9px;
+  border-radius: 20px;
+}
 
 /* Focus states */
 a:focus-visible, button:focus-visible {
