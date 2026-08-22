@@ -577,6 +577,21 @@ body.modal-open { overflow: hidden; }
 
 .meet-mia-cta { margin-top: 32px; text-align: center; }
 
+.pray-callout {
+  background: rgba(218,161,41,0.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 12px 12px 0;
+  padding: 20px 22px;
+  margin: 22px 0 30px;
+  text-align: center;
+}
+.pray-callout .eyebrow { margin-bottom: 4px; }
+.pray-callout h2 {
+  font-size: 1.7rem;
+  margin: 0 0 10px;
+}
+.pray-callout p { margin: 0 0 18px; }
+
 .collab-join-cta { margin: 18px 0 24px; text-align: center; }
 
 .photo-row { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; justify-content: center; }
