@@ -103,7 +103,7 @@
   .lcard .lab{ font-family:'Nunito'; font-weight:800; font-size:13.5px; color:var(--burgundy); display:block; }
   .lcard .url{ font-family:'Lato'; font-size:12.5px; color:var(--navy); opacity:0.8; word-break:break-all; }
   .lcard .go{ margin-left:auto; color:var(--gold); font-size:18px; flex-shrink:0; }
-  .lcard .copybtn{
+  .copybtn{
     margin-left:auto; flex-shrink:0;
     width:34px; height:34px; border-radius:9px;
     background:var(--cream); border:1.5px solid var(--gold-soft);
@@ -111,11 +111,11 @@
     color:var(--burgundy); cursor:pointer;
     transition:background .15s ease, transform .1s ease;
   }
-  .lcard .copybtn:active{ transform:scale(0.92); }
-  .lcard .copybtn .icon-check{ display:none; }
-  .lcard .copybtn.copied{ background:var(--gold-soft); }
-  .lcard .copybtn.copied .icon-copy{ display:none; }
-  .lcard .copybtn.copied .icon-check{ display:block; }
+  .copybtn:active{ transform:scale(0.92); }
+  .copybtn .icon-check{ display:none; }
+  .copybtn.copied{ background:var(--gold-soft); }
+  .copybtn.copied .icon-copy{ display:none; }
+  .copybtn.copied .icon-check{ display:block; }
   .toast{
     position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px);
     background:var(--burgundy); color:#fff; font-family:'Nunito'; font-weight:700; font-size:13px;
@@ -228,6 +228,31 @@
   <div class="lcard pending">
     <div class="ic">💰</div>
     <div><span class="lab">GoFundMe <span class="tag-pending">Próximamente</span></span><span class="url">Se agregará este link en cuanto esté listo</span></div>
+  </div>
+</section>
+
+<!-- ===== REEL ===== -->
+<section>
+  <div class="eyebrow-s">Ayúdanos a que se sepa</div>
+  <h1 class="stitle">El Reel de la Aldea</h1>
+  <p>Comparte este video en tus redes — es la forma más rápida de que más personas conozcan la historia de Mía y se sumen a su Aldea.</p>
+
+  <a class="lcard" href="https://drive.google.com/file/d/1XD4Iq0Lnu0n10gdKmfPTzZPHQsIqZ4Tw/view?usp=drivesdk" target="_blank">
+    <div class="ic">🎬</div>
+    <div><span class="lab">Ver / descargar el Reel</span><span class="url">drive.google.com/file/d/1XD4Iq0…</span></div>
+    <div class="copybtn" onclick="event.preventDefault(); event.stopPropagation(); copyLink(this, 'https://drive.google.com/file/d/1XD4Iq0Lnu0n10gdKmfPTzZPHQsIqZ4Tw/view?usp=drivesdk')"><svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+  </a>
+
+  <h2 class="sub">Copy sugerido (con hashtags) — toca para copiar todo</h2>
+  <div class="greeting" style="position:relative; padding-right:54px; white-space:pre-line; cursor:pointer;" onclick="copyLink(this.querySelector('.copybtn'), 'Había una aldea que fue construida para una niña muy especial. 🎗️\n\nSe llama Mía, tiene 5 años, y está enfrentando el cáncer infantil con toda su fuerza. Su familia armó un lugar para que puedas conocer su historia, ver justo lo que se necesita esta semana, y ser parte de su Aldea — como tú puedas.\n\nEntra al link.\nSe necesita una aldea. Esta es la de Mía. 💛\n\n#MiasVillageOfHope #ItTakesAVillage #SeNecesitaUnaAldea #ChildhoodCancerAwareness #PediatricCancerAwareness #CancerInfantil #GoldRibbon #MiaStrong #PrayForMia #CommunitySupport')">Había una aldea que fue construida para una niña muy especial. 🎗️
+
+Se llama Mía, tiene 5 años, y está enfrentando el cáncer infantil con toda su fuerza. Su familia armó un lugar para que puedas conocer su historia, ver justo lo que se necesita esta semana, y ser parte de su Aldea — como tú puedas.
+
+Entra al link.
+Se necesita una aldea. Esta es la de Mía. 💛
+
+#MiasVillageOfHope #ItTakesAVillage #SeNecesitaUnaAldea #ChildhoodCancerAwareness #PediatricCancerAwareness #CancerInfantil #GoldRibbon #MiaStrong #PrayForMia #CommunitySupport
+    <div class="copybtn" style="position:absolute; top:14px; right:14px;"><svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
   </div>
 </section>
 
