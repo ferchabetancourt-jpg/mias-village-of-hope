@@ -32,7 +32,7 @@ Meta de entrega: lunes 24 agosto 2026
 - [ ] Crear cuenta GoFundMe
 - [x] Crear cuenta Gmail (para el botón de contacto) — miasvillageofhope@gmail.com
 - [ ] Tener a la mano el link de Behance (para el copyright de Contact)
-- [ ] Reel para redes — invitación a la Aldea, con buen gancho + URL de la web
+- [x] Reel para redes — integrado como nueva sección "El Reel de la Aldea" dentro de `/guia`: link al video (Drive, con nota de que hay que descargarlo antes de subirlo a IG/TikTok), copy sugerido + hashtags, todo copiable de un toque
 - [x] Guía de entrega para la familia — se hizo como página web (`/guia`) en vez de PDF: paleta del proyecto, links de la Aldea, explicación paso a paso de cómo actualizar necesidades, y cómo guardar accesos directos en el teléfono. Oculta (no aparece en el menú ni se enlaza desde el sitio), igual que `/actualizar`.
 
 ---
@@ -87,12 +87,11 @@ Meta de entrega: lunes 24 agosto 2026
 - [x] Collaborators: botón "¿Quieres unirte?" debajo del título, link a mailto:miasvillageofhope@gmail.com
 - [x] Contact: agregar links de Facebook y WhatsApp — Facebook `facebook.com/profile.php?id=61593459297860`, WhatsApp `chat.whatsapp.com/ECNqCHebKnv8JJXzsBJNhq`; GoFundMe y Zelle quedan en placeholder hasta que existan las cuentas
 - [ ] Contact: copyright discreto al final — "© María Fernanda Betancourt" + link a Behance (bloqueado hasta tener el link a mano)
+- [x] `/guia` y `/actualizar` — cada uno con su propio ícono al agregar a inicio (libro+cinta y canasta "NEEDS", respectivamente), en vez de compartir el de la Aldea. Además: bug preexistente arreglado — `.banner-emblem` en `/actualizar` no tenía regla de tamaño en el CSS y se renderizaba gigante (`emblem.png` a 1254px nativo); y `emblem.png` se actualizó al diseño de marca actual (cinta + casitas + logo).
 
 ### No es código (contenido / cuentas)
 - [ ] Crear cuenta GoFundMe
 - [ ] Información de Zelle de Sonia
-- [ ] Reel para redes
-- [ ] PDF guía de entrega para la familia
 
 ---
 
