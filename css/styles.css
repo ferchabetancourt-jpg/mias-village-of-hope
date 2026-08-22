@@ -797,6 +797,14 @@ body.modal-open { overflow: hidden; }
   margin-top: 40px;
 }
 
+.footer-copyright {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: rgba(20,33,50,0.4);
+  text-align: center;
+  margin-top: 14px;
+}
+
 /* MÍA AUDIO PLAYER */
 .mia-audio { margin-top: 28px; text-align: center; }
 #mia-audio-btn { display: inline-flex; align-items: center; gap: 8px; }
