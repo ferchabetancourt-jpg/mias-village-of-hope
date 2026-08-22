@@ -29,7 +29,7 @@ Meta de entrega: lunes 24 agosto 2026
 
 - [x] Link WhatsApp — Ok
 - [x] Link Facebook — Ok
-- [ ] Crear cuenta GoFundMe
+- [x] Crear cuenta GoFundMe — `gofund.me/6da1fd27a`, ya conectado en Contact y en `/guia`
 - [x] Crear cuenta Gmail (para el botón de contacto) — miasvillageofhope@gmail.com
 - [ ] Tener a la mano el link de Behance (para el copyright de Contact)
 - [x] Reel para redes — integrado como nueva sección "El Reel de la Aldea" dentro de `/guia`: link al video (Drive, con nota de que hay que descargarlo antes de subirlo a IG/TikTok), copy sugerido + hashtags, todo copiable de un toque
@@ -90,9 +90,9 @@ Meta de entrega: lunes 24 agosto 2026
 - [x] `/guia` y `/actualizar` — cada uno con su propio ícono al agregar a inicio (libro+cinta y canasta "NEEDS", respectivamente), en vez de compartir el de la Aldea. Además: bug preexistente arreglado — `.banner-emblem` en `/actualizar` no tenía regla de tamaño en el CSS y se renderizaba gigante (`emblem.png` a 1254px nativo); y `emblem.png` se actualizó al diseño de marca actual (cinta + casitas + logo).
 - [x] `/guia` — ronda de ajustes (22 agosto): los 2 links de "actualizar necesidades" apuntaban al formulario suelto en vez de a `/actualizar` (el link directo queda solo como respaldo); se agregó explicación de cómo hacer tocable el link del reel al postearlo en IG/TikTok (link en bio propia, primer comentario, o DM); mensaje listo para copiar e invitar a alguien a la Aldea por WhatsApp; se quitó el copyright del footer.
 - [x] The Village: callout "Pray for Mía" con link al post fijado de Facebook donde la gente deja oraciones en los comentarios — Fase 1, sin moderación ni backend nuevo. Vive dentro de la estación The Village existente (no se tocó el mapa ni el menú — una estación nueva de verdad requeriría arte nuevo para un 6to edificio ilustrado).
+- [x] GoFundMe conectado (`gofund.me/6da1fd27a`) — placeholder de Contact reemplazado por el link real; en `/guia` la tarjeta pasó de "Próximamente" a link real, con nota de que la info de pagos (GoFundMe, Zelle, bancos) se puede actualizar escribiendo al correo de la Aldea. Zelle sigue pendiente.
 
 ### No es código (contenido / cuentas)
-- [ ] Crear cuenta GoFundMe
 - [ ] Información de Zelle de Sonia
 
 ---
