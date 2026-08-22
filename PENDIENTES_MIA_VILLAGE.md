@@ -88,6 +88,8 @@ Meta de entrega: lunes 24 agosto 2026
 - [x] Contact: agregar links de Facebook y WhatsApp — Facebook `facebook.com/profile.php?id=61593459297860`, WhatsApp `chat.whatsapp.com/ECNqCHebKnv8JJXzsBJNhq`; GoFundMe y Zelle quedan en placeholder hasta que existan las cuentas
 - [ ] Contact: copyright discreto al final — "© María Fernanda Betancourt" + link a Behance (bloqueado hasta tener el link a mano)
 - [x] `/guia` y `/actualizar` — cada uno con su propio ícono al agregar a inicio (libro+cinta y canasta "NEEDS", respectivamente), en vez de compartir el de la Aldea. Además: bug preexistente arreglado — `.banner-emblem` en `/actualizar` no tenía regla de tamaño en el CSS y se renderizaba gigante (`emblem.png` a 1254px nativo); y `emblem.png` se actualizó al diseño de marca actual (cinta + casitas + logo).
+- [x] `/guia` — ronda de ajustes (22 agosto): los 2 links de "actualizar necesidades" apuntaban al formulario suelto en vez de a `/actualizar` (el link directo queda solo como respaldo); se agregó explicación de cómo hacer tocable el link del reel al postearlo en IG/TikTok (link en bio propia, primer comentario, o DM); mensaje listo para copiar e invitar a alguien a la Aldea por WhatsApp; se quitó el copyright del footer.
+- [x] The Village: callout "Pray for Mía" con link al post fijado de Facebook donde la gente deja oraciones en los comentarios — Fase 1, sin moderación ni backend nuevo. Vive dentro de la estación The Village existente (no se tocó el mapa ni el menú — una estación nueva de verdad requeriría arte nuevo para un 6to edificio ilustrado).
 
 ### No es código (contenido / cuentas)
 - [ ] Crear cuenta GoFundMe
