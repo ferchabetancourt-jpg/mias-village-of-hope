@@ -91,6 +91,9 @@ Meta de entrega: lunes 24 agosto 2026
 - [x] `/guia` — ronda de ajustes (22 agosto): los 2 links de "actualizar necesidades" apuntaban al formulario suelto en vez de a `/actualizar` (el link directo queda solo como respaldo); se agregó explicación de cómo hacer tocable el link del reel al postearlo en IG/TikTok (link en bio propia, primer comentario, o DM); mensaje listo para copiar e invitar a alguien a la Aldea por WhatsApp; se quitó el copyright del footer.
 - [x] The Village: callout "Pray for Mía" con link al post fijado de Facebook donde la gente deja oraciones en los comentarios — Fase 1, sin moderación ni backend nuevo. Vive dentro de la estación The Village existente (no se tocó el mapa ni el menú — una estación nueva de verdad requeriría arte nuevo para un 6to edificio ilustrado).
 - [x] GoFundMe conectado (`gofund.me/6da1fd27a`) — placeholder de Contact reemplazado por el link real; en `/guia` la tarjeta pasó de "Próximamente" a link real, con nota de que la info de pagos (GoFundMe, Zelle, bancos) se puede actualizar escribiendo al correo de la Aldea. Zelle sigue pendiente.
+- [x] Contact: botón de Zelle roto arreglado — tenía `href="PLACEHOLDER_ZELLE_INFO"` (llevaba a un 404); ahora es un elemento sin link, atenuado, con etiqueta "Coming soon" / "Próximamente".
+- [x] Copyright discreto agregado (Contact + pie de `/guia`) — texto final: "Website & Creative Design © María Fernanda Betancourt" (precisado para no insinuar autoría sobre la historia/idea, que es de Sonia). Falta solo el link a Behance.
+- [x] Meet Mía: dos cartas colapsables después del Resumen y "The Village Needs" — "To Mía" (el "Escrito de Sonia" que ya existía, ahora en el mismo patrón `<details>` de Collaborators) y "To Sonia" (nueva, carta de Sonia Celpa sobre Sonia Rivas). El botón de audio y el CTA se movieron después de ambas cartas para que sigan siempre visibles.
 
 ### No es código (contenido / cuentas)
 - [ ] Información de Zelle de Sonia
