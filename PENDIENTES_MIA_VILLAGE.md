@@ -1,7 +1,8 @@
 # PENDIENTES_MIA_VILLAGE.md
 Ruta de pendientes — Proyecto "Mía's Village of Hope"
-Última actualización: 20 agosto 2026
-Meta de entrega: lunes 24 agosto 2026
+Última actualización: 19 septiembre 2026
+
+Fercha entregó el sitio en la fecha pactada (24 agosto 2026). Lo que sigue abierto de acá en adelante depende de que Sonia complete sus pendientes (ver 🟡 SONIA abajo) — el proyecto está en espera de eso, no atrasado del lado de Fercha.
 
 ---
 
@@ -99,12 +100,20 @@ Meta de entrega: lunes 24 agosto 2026
 ### No es código (contenido / cuentas)
 - [ ] Información de Zelle de Sonia
 
+### Bloque 5 — Documentación (19 septiembre 2026) ✅ COMPLETADO
+- [x] Creado `SPEC_MIA_VILLAGE.md` — spec funcional documentando cómo funciona el sitio de verdad (estaciones, flujo de datos de Needs, qué no tiene el sitio a propósito), ya que el `FLUJO_MIA_VILLAGE.md` original nunca existió en el repo
+- [x] `README.md` reescrito — el anterior era el scaffold genérico inicial, con una lista de pendientes desactualizada (9 de 10 ítems ya resueltos)
+- [x] Auditoría IDENTIDAD_VISUAL vs. código real — colores y tipografía coinciden al 100%, sin discrepancias
+
+### 🧹 Limpieza técnica — anotado, sin tocar
+- [ ] Hay 4 archivos `.DS_Store` y un CSV de prueba vacío + su `.zip` ("Actualizar la lista de Mía.csv[.zip]", solo encabezados, sin datos reales) trackeados en git — basura de desarrollo, no filtran info sensible. Sugerencia: agregarlos a `.gitignore` y sacarlos del repo. Requiere confirmación antes de tocar código.
+
 ---
 
 ## ⏸️ APLAZADO (si sobra tiempo)
 
 - [ ] Mapa a pantalla completa (riesgo de romper hotspots — pausado por decisión de Fercha)
-- [ ] Barra de progreso automática en "This Week's Needs" (necesita/cubierto/falta) — recordatorio: esto es Fase 2 según `FLUJO_MIA_VILLAGE.md`, no tocar en Fase 1. Bloque 3 sí incluye mostrar los números en texto simple.
+- [ ] Barra de progreso automática en "This Week's Needs" (necesita/cubierto/falta) — recordatorio: esto es Fase 2 según `SPEC_MIA_VILLAGE.md`, no tocar en Fase 1. Bloque 3 sí incluye mostrar los números en texto simple.
 
 ---
 
